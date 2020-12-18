@@ -1,0 +1,132 @@
+.administrator {
+  height: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  .adsidebar-navigation{
+    position: relative;
+    overflow: hidden;
+    width: 300px;
+    height: 100%;
+  }
+  .admain-content {
+    flex: 1;
+    padding: 30px;
+  }
+}
+
+#sidebar-menu {
+  background-color: rgb(28, 153, 211);
+  padding: 15px;
+  height: 100%;
+  .sidebar-header {
+    padding: 20px;
+    text-align: center;
+    border-bottom-style: solid;
+    border-bottom-color: white;
+    img {
+      object-fit: cover;
+      width: 70px;
+    }
+    span {
+      font-size: 30px;
+      color: white;
+      font-weight: bold;
+      margin: auto;
+    }
+  }
+  ul{
+    border: 0;
+    font-weight: normal;
+    line-height: 1;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    position: relative;
+    text-decoration: none;
+    .part {
+      margin: 20px;
+      .menu-title {
+        padding: 12px 15px!important;
+        letter-spacing: .035em;
+        pointer-events: none;
+        cursor: default;
+        font-size: 24px;
+        color: white;
+        font-weight: bold;
+      }
+      li {
+        a {
+          color: white;
+          display: block;
+          padding: 20px 40px;
+          font-size: 17.5px;
+          bottom: 30px;
+        }
+      }
+    }
+  }
+}
+
+.administrator-no {
+  margin: 30px 0;
+  border-bottom: solid;
+  border-bottom-color: lightgrey;
+}
+
+h1 {
+  font-size: 32px;
+  color: grey;
+}
+h2 {
+  font-size: 24px;
+  color: grey;
+  padding: 20px;
+}
+
+.changepsw {
+  padding: 20px 0;
+  flex: 1;
+  width: 60%;
+  min-width: 60%; // 加入这两个后每个item的宽度就生效了
+  max-width: 60%;
+  margin: 0px 0px 5px;
+  span {
+      float: left;
+      width: 20%;
+      text-align: right;
+      padding: 10px;
+      margin: 10px;
+      // margin-top: 10px;
+      color: #969696;
+      font-size: 18px;
+  }
+  input{
+      color: #555;
+      font-size: 18px;
+      width: 40%;
+      padding: 10px;
+      // margin-top: 2px;
+      // margin-right: 6px;
+      // margin-bottom: 16px;
+      margin: 10px;
+      border: 1px solid #e5e5e5;
+      background: #fbfbfb;
+      height: 30px;
+      line-height:20px;
+      outline: 0;
+      box-shadow: inset 1px 1px 2px rgba(200,200,200,0.2);
+  }
+  .subpsw {
+    border: none;
+    color: grey;
+    padding: 10px 40px;
+    text-align: center;
+    text-decoration: none;
+    // display: inline-block;
+    font-size: 20px;
+    margin: 30px 120px;
+    cursor: pointer;
+    border-radius: 8px;
+  }
+
+}

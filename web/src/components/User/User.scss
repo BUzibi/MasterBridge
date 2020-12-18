@@ -1,0 +1,131 @@
+.hero {
+    width: 100%;
+    margin: 0 auto;
+    text-align: left;
+  }
+  
+  .sidebar-navigation {
+    width: 280px;
+    position: absolute;
+    top: 104px;
+    left: 0px;
+    z-index: 4;
+    padding: 30px 30px;
+    margin-left: 30px;
+    background-color: white;
+  }
+  
+  .sidebar-navigation ul {
+    list-style: none;
+  }
+  
+  .sidebar-navigation ul li {
+    width: 100%;
+    float: left;
+    font-size: 1.125em;
+    padding: 0px;
+    margin: 0px 0px 20px;
+  }
+  
+  .sidebar-navigation ul li a {
+    float: left;
+    display: block;
+    color: rgb(34, 44, 55);
+    text-decoration: none;
+    cursor: pointer;
+    word-break: break-word;
+  }
+  
+  .sidebar-navigation ul li a:hover, .sidebar-navigation ul li a.selected {
+    color: rgb(0, 188, 212);
+  }
+  
+  .content-wrapper {
+    width: 100%;
+    max-width: 1280px;
+    text-align: left;
+    margin: 0px auto;
+    padding: 30px;
+  }
+  
+  .group, .group.nest {
+    padding: 15px !important;
+  }
+  
+  .g12 {
+    width: 100%;
+    float: left;
+    padding: 15px;
+  }
+  
+  .nest {
+    padding: 0px !important;
+  }
+  
+  .mb0 {
+    margin-bottom: 0px !important;
+    font-size: 2.25em;
+    line-height: 1em;
+    margin: 0px 0px 20px;
+    color: black;
+  }
+  
+  
+  h1, h2, h3 {
+    color: rgb(34, 44, 55);
+    font-weight: 700;
+  }
+  
+  h4 {
+    font-size: 1.25em;
+    line-height: 1.3em;
+  }
+  
+  .item-list  {
+    float: left;
+    z-index: 2;
+    padding: 20px 0px;
+    background: rgb(255, 255, 255);
+    margin: 0px 0px 1px;
+    transition: all 0.1s ease 0s;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .item {
+    /* flex: 1; */
+    display: flex;
+    flex-direction: row;
+    height: 80px;
+    width: 800px;
+    justify-content: space-between;
+    border-top: 1px solid #e6e6e6;
+  }
+  
+  
+  .item-list .item div.lbl {
+    width: 25%;
+    line-height: 80px;
+    float: left;
+    color: rgb(34, 44, 55);
+    font-weight: 400;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    padding: 0px 0px 0px 30px;
+    /* overflow: hidden; */
+  }
+  
+  .item-list .item div.val {
+    width: 75%;
+    line-height: 80px;
+    float: left;
+    padding: 0px 105px 0px 0px;
+  }
+  
+  .main-content {
+    float: left;
+    padding: 0 0 0 265px;
+    position: relative;
+    width: 100%;
+  }

@@ -1,0 +1,80 @@
+.management-box {
+    background-color: #fff;
+    border-radius: 20px;
+    box-shadow: 0 20px 40px rgba(103,118,128,0.03);
+    padding: 1.875rem;
+    position: relative;
+    transition: box-shadow .3s ease-in-out;
+    .box-header {
+        margin-bottom: 2.3125rem;
+        position: relative;
+        font-size: 2rem;
+        border-bottom: rgb(0, 153, 255);
+    }
+}
+
+.portrait-list {
+    flex: 0 0 auto;
+    table {
+        margin: 0;
+        width: 100%;
+        border: 1px solid #ddd;
+        color: #666;
+        table-layout: fixed;
+        border-collapse: collapse;
+        thead {
+            line-height: 50px;
+            display: table-header-group;
+            vertical-align: middle;
+            th {
+                font-weight: 500;
+                padding: 0 10px;
+                text-align: center;
+                white-space: nowrap;
+                border: 1px solid #ddd;
+                width: 25%;
+            }
+        }
+    }
+}
+
+tr {
+    display: table-row;
+    vertical-align: inherit;
+    border-color: inherit;
+}
+
+.action {
+    margin: 40px;
+    align-items: center;
+    text-align: center;
+    button {
+        color: black;
+        background-color: white; /* Green */
+        border: none;
+        padding: 15px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 4px 2px;
+        cursor: pointer;
+        border-radius: 8px;
+    }
+}
+
+.button-group {
+    button {
+        border: none;
+        color: white;
+        padding: 10px 26px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 2px 2px;
+        cursor: pointer;
+        border-radius: 8px;
+        background-color: rgb(211, 210, 210);
+    }
+}

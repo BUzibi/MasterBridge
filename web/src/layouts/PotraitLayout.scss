@@ -1,0 +1,86 @@
+.potrait-layout {
+    height: 100%;
+    padding-top: 72px;
+    display: flex;
+}
+
+.potrait-main {
+    background-color: #f3f3f3;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    width: 100%;
+    padding: 20px 60px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.psidebar {
+    -ms-flex: 0 0 16.666667%;
+    flex: 0 0 16.666667%;
+    max-width: 16.666667%;
+    padding: 30px;
+    .box {
+        background-color: #fff;
+        border-radius: 20px;
+        box-shadow: 0 20px 40px rgba(103,118,128,0.03);
+        padding: 1.875rem;
+        position: relative;
+        transition: box-shadow .3s ease-in-out;
+    }
+
+    .nav {
+        display: -ms-flexbox;
+        display: flex;
+        -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+        padding-left: 0;
+        margin-bottom: 0;
+        list-style: none;
+    }
+
+    .nav-item {
+        display: block;
+        height: 9.25rem;
+        margin-bottom: 1rem;
+        text-align: center;
+        text-transform: uppercase;
+        width: 100%;
+        a {
+            background-color: #F7F9FA;
+            border-radius: 1.25rem;
+            color: #5E6E80;
+            font-size: .875rem;
+            font-weight: 500;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            position: relative;
+            text-decoration: none;
+            transition: all 0s;
+            .active {
+                background-image: linear-gradient(142.17deg,#3086FF 6.66%,#304CFD 91.48%);
+                box-shadow: inset -0.25rem -0.25rem 0.3125rem rgba(0,0,0,0.1), inset 0.25rem 0.25rem 0.3125rem rgba(255,255,255,0.23);
+                color: #fff;
+            }
+        }
+        .potrait-icon {
+            background-color: #f3f3f3;
+            display: block;
+            width: 50px;
+            height: 50px;
+            font-size: 2.25rem;
+            margin-top: .25rem;
+            margin-bottom: .5rem;
+        }
+    }
+}
+
+.pcontent{
+    flex: 1;
+    padding: 30px;
+    align-items: center;
+}

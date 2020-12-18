@@ -1,0 +1,14 @@
+.makepotrait-box {
+    background-color: #fff;
+    border-radius: 20px;
+    box-shadow: 0 20px 40px rgba(103,118,128,0.03);
+    padding: 1.875rem;
+    position: relative;
+    transition: box-shadow .3s ease-in-out;
+    .box-header {
+        margin-bottom: 2.3125rem;
+        position: relative;
+        font-size: 2rem;
+        border-bottom: rgb(0, 153, 255);
+    }
+}

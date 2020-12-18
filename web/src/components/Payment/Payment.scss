@@ -1,0 +1,48 @@
+.payment-box {
+    background-color: #fff;
+    border-radius: 20px;
+    box-shadow: 0 20px 40px rgba(103,118,128,0.03);
+    padding: 1.875rem;
+    position: relative;
+    transition: box-shadow .3s ease-in-out;
+    .prompt {
+        margin: 20px auto;
+        text-align: center;
+        position: relative;
+        font-size: 1.8rem;
+        border-bottom: rgb(0, 153, 255);
+    }
+
+    .paymentarea {
+        text-align: center;
+        .QR-code {
+            object-fit: cover;
+            width: 280px;
+        }
+    }
+
+    .payment-result {
+        display: flex;
+        margin-top: 20px;
+        justify-content: center;
+        button {
+            border: none;
+            color: white;
+            padding: 10px 26px;
+            text-align: center;
+            text-decoration: none;
+            // display: inline-block;
+            font-size: 16px;
+            margin: 4px 20px;
+            cursor: pointer;
+            border-radius: 8px;
+        }
+        .payed {
+            background-color: rgb(76, 216, 57);
+        }
+        .payfailed {
+            background-color: rgb(175, 5, 5);
+        }
+    }
+    
+}

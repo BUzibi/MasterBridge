@@ -1,0 +1,202 @@
+.content-container {
+  display: flex;
+  position: relative;
+  margin-left: 60px;
+  margin-top: 60px;
+  padding: 0 60px;
+}
+
+.main-left {
+  -webkit-box-flex: 0;
+  width: 810px;
+  flex: 0 0 auto;
+  box-shadow: rgb(230, 230, 230) 0px -1px 0px 0px inset;
+}
+
+.tab-box {
+  display: flex;
+  margin-bottom: 40px;
+}
+
+.tab {
+  font-size: 40px;
+  font-weight: 500;
+  line-height: 1.2;
+  margin-right: 40px;
+  color: rgb(33, 33, 33);
+  padding-bottom: 8px;
+  position: relative;
+  cursor: pointer;
+}
+
+.list-wrap {
+    background-color: rgb(255, 255, 255);
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 14px 0px;
+    border-radius: 6px;
+}
+
+.search-wrap {
+  border-bottom: 1px solid rgb(230, 230, 230);
+  padding: 20px 24px;
+}
+
+.input-wrap {
+  width: 100%;
+  position: relative;
+}
+
+.text-input  {
+  -webkit-box-flex: 1;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  flex-direction: row;
+  -webkit-box-align: center;
+  align-items: center;
+  -webkit-box-pack: start;
+  justify-content: flex-start;
+  position: relative;
+  cursor: text;
+  width: 100%;
+  flex: 1 1 auto;
+}
+
+.search-icon {
+  margin-left: 12px;
+  position: absolute;
+  z-index: 10;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.input-wrap-border {
+  height: 32px;
+  background-color: transparent;
+  border-width: 0px;
+  -webkit-box-flex: 1;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  flex-direction: row;
+  -webkit-box-pack: justify;
+  justify-content: space-between;
+  -webkit-box-align: center;
+  align-items: center;
+  width: 100%;
+  height: 40px;
+  position: relative;
+  flex: 1 0 auto;
+  padding: 0px;
+  border-width: 1px;
+  border-style: solid;
+  border-color: rgb(213, 213, 213);
+  border-image: initial;
+  border-radius: 4px;
+}
+
+.input-class {
+  background-color: rgb(245, 247, 248);
+  padding-left: 42px !important;
+  font-size: 14px;
+  color: rgb(33, 33, 33);
+  padding-left: 8px;
+  line-height: 40px;
+  -webkit-box-flex: 1;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  flex-direction: row;
+  -webkit-box-pack: start;
+  justify-content: flex-start;
+  flex: 1 1 auto;
+  margin: 0px;
+  padding: 0px 30px 0px 16px;
+  border-width: initial;
+  border-style: none;
+  border-color: initial;
+  border-image: initial;
+  outline: none;
+  border-radius: 4px;
+}
+
+.message-card {
+    /* display: flex; */
+    /* -webkit-box-align: center; */
+    align-items: center;
+    padding: 20px 16px 20px 24px;
+    border-bottom: 1px solid rgb(230, 230, 230);
+  }
+  
+  .card-left {
+      -webkit-box-flex: 1;
+      flex: 1 0 auto;
+  }
+  
+  .title-content {
+    display: inline-block;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 1.5;
+    color: rgb(33, 33, 33);
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    max-width: 594px;
+    text-decoration: none;
+    overflow: hidden;
+  }
+  
+  .title-info {
+      display: flex;
+      margin-top: 12px;
+  }
+  
+  .university {
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 1.43;
+    color: rgb(66, 66, 66);
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    max-width: 150px;
+    /* overflow: hidden; */
+  }
+  
+  .main-right {
+    -webkit-box-flex: 0;
+    margin-left: auto;
+    margin-right: 60px;
+    width: 390px;
+    flex: 0 0 auto;
+  }
+  
+  .action-wrap {
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 14px 0px;
+    background-color: rgb(255, 255, 255);
+    margin-bottom: 30px;
+    margin-top: 95px;
+    border-radius: 6px;
+    padding: 24px 0px;
+  }
+  
+  .top-wrap {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+  }
+  
+  .icon-item {
+    align-items: center;
+    -webkit-box-pack: center;
+    justify-content: center;
+    cursor: pointer;
+    flex: 1 0 auto;
+    text-align: center;
+    .icon_text {
+      margin-left: 0;
+      margin-top: 8px;
+      font-size: 16px;
+      line-height: 1.5;
+      color: #212121;
+    }
+  }
+  

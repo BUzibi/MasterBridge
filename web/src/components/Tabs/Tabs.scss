@@ -1,0 +1,48 @@
+.tabs {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    margin-top: 24px;
+    margin-bottom: 40px;
+    &-head {
+        list-style: none;
+        display: flex;
+        flex-direction: row;
+        font-family: Roboto;
+        font-size: 18px;
+        margin-top: 12px;
+        margin-bottom: 12px;
+        cursor: pointer;
+        li {
+            width: 90px;
+            height: 48px;
+            position: relative;
+            padding: 10px 20px;
+            cursor: pointer;
+
+            &.active {
+                box-shadow: inset 0 -2px 0 0 #2196f3;
+                color: #2196f3;
+            }
+        }
+    }
+}
+
+.tabs-content {
+    align-items: center;
+    text-align: center;
+    .resume-add {
+        color: white;
+        background-color:  rgb(51, 207, 51);
+        border: none;
+        padding: 15px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 4px 2px;
+        cursor: pointer;
+        border-radius: 8px;
+    }
+}
+
