@@ -1,0 +1,11 @@
+# yaml 配置
+version: '1'
+services:
+  web:
+    build: .
+    ports:
+     - "5000:5000"
+  db:
+    image: mongo
+    ports:
+     - "27017:27017"

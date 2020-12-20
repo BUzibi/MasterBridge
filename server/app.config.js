@@ -28,9 +28,9 @@ exports.CROSS_DOMAIN = {
 };
 
 exports.MONGODB = {
-	uri: `mongodb://127.0.0.1:${argv.dbport || '27017'}/blogNode`,
-	username: argv.db_username || 'DB_username',
-	password: argv.db_password || 'DB_password',
+	uri: `mongodb://127.0.0.1:${argv.dbport || '27017'}/masterbridge`,
+	username: argv.db_username || 'admin',
+	password: argv.db_password || '123456',
 };
 exports.AUTH = {
 	data: argv.auth_data || { user: 'root' },

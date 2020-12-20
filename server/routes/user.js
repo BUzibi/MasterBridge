@@ -4,94 +4,44 @@ const User = require('../models/user');
 // const OAuth = require('../models/oauth');
 import { MD5_SUFFIX, responseClient, md5 } from '../util/util.js';
 
-// 第三方授权登录的用户信息
-exports.getUser = (req, res) => {
-  let { code } = req.body;
-  if (!code) {
-    responseClient(res, 400, 2, 'code 缺失');
+exports.register = (req, res) => {
+  let { name, type, password, introduction } = req.body;
+  if (!name) {
+    responseClient(res, 400, 2, '用户名不可为空');
     return;
   }
-  let path = CONFIG.GITHUB.access_token_url;
-  const params = {
-    client_id: CONFIG.GITHUB.client_id,
-    client_secret: CONFIG.GITHUB.client_secret,
-    code: code,
-  };
-  // console.log(code);
-  fetch(path, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json', 
-    },
-    body: JSON.stringify(params),
-  })
-    .then(res1 => {
-      return res1.text();
+  if (!password) {
+    responseClient(res, 400, 2, '密码不可为空');
+    return;
+  }
+  //验证用户是否已经在数据库中
+  User.findOne({ name: name })
+    .then(data => {
+      if (data) {
+        responseClient(res, 200, 1, '用户邮箱已存在！');
+        return;
+      }
+      //保存到数据库
+      let user = new User({
+        name,
+        password: md5(password + MD5_SUFFIX),
+        type,
+        introduction,
+      });
+      user.save().then(data => {
+        responseClient(res, 200, 0, '注册成功', data);
+      });
     })
-    .then(body => {
-      const args = body.split('&');
-      let arg = args[0].split('=');
-      const access_token = arg[1];
-      // console.log("body:",body);
-      console.log('access_token:', access_token);
-      return access_token;
-    })
-    .then(async token => {
-      const url = CONFIG.GITHUB.user_url + '?access_token=' + token;
-      console.log('url:', url);
-      await fetch(url)
-        .then(res2 => {
-          console.log('res2 :', res2);
-          return res2.json();
-        })
-        .then(response => {
-          console.log('response ', response);
-          if (response.id) {
-            //验证用户是否已经在数据库中
-            User.findOne({ github_id: response.id })
-              .then(userInfo => {
-                // console.log('userInfo :', userInfo);
-                if (userInfo) {
-                  //登录成功后设置session
-                  req.session.userInfo = userInfo;
-                  responseClient(res, 200, 0, '授权登录成功', userInfo);
-                } else {
-                  let obj = {
-                    github_id: response.id,
-                    email: response.email,
-                    password: response.login,
-                    type: 2,
-                    avatar: response.avatar_url,
-                    name: response.login,
-                    location: response.location,
-                  };
-                  //保存到数据库
-                  let user = new User(obj);
-                  user.save().then(data => {
-                    // console.log('data :', data);
-                    req.session.userInfo = data;
-                    responseClient(res, 200, 0, '授权登录成功', data);
-                  });
-                }
-              })
-              .catch(err => {
-                responseClient(res);
-                return;
-              });
-          } else {
-            responseClient(res, 400, 1, '授权登录失败', response);
-          }
-        });
-    })
-    .catch(e => {
-      console.log('e:', e);
+    .catch(err => {
+      responseClient(res);
+      return;
     });
 };
 
 exports.login = (req, res) => {
-  let { email, password } = req.body;
-  if (!email) {
-    responseClient(res, 400, 2, '用户邮箱不可为空');
+  let { name, password } = req.body;
+  if (!name) {
+    responseClient(res, 400, 2, '用户名不可为空');
     return;
   }
   if (!password) {
@@ -99,7 +49,7 @@ exports.login = (req, res) => {
     return;
   }
   User.findOne({
-    email,
+    name,
     password: md5(password + MD5_SUFFIX),
   })
     .then(userInfo => {
@@ -193,53 +143,6 @@ exports.loginAdmin = (req, res) => {
     });
 };
 
-exports.register = (req, res) => {
-  let { name, password, phone, email, introduce, type } = req.body;
-  if (!email) {
-    responseClient(res, 400, 2, '用户邮箱不可为空');
-    return;
-  }
-  const reg = new RegExp(
-    '^[a-z0-9]+([._\\-]*[a-z0-9])*@([a-z0-9]+[-a-z0-9]*[a-z0-9]+.){1,63}[a-z0-9]+$',
-  ); //正则表达式
-  if (!reg.test(email)) {
-    responseClient(res, 400, 2, '请输入格式正确的邮箱！');
-    return;
-  }
-  if (!name) {
-    responseClient(res, 400, 2, '用户名不可为空');
-    return;
-  }
-  if (!password) {
-    responseClient(res, 400, 2, '密码不可为空');
-    return;
-  }
-  //验证用户是否已经在数据库中
-  User.findOne({ email: email })
-    .then(data => {
-      if (data) {
-        responseClient(res, 200, 1, '用户邮箱已存在！');
-        return;
-      }
-      //保存到数据库
-      let user = new User({
-        email,
-        name,
-        password: md5(password + MD5_SUFFIX),
-        phone,
-        type,
-        introduce,
-      });
-      user.save().then(data => {
-        responseClient(res, 200, 0, '注册成功', data);
-      });
-    })
-    .catch(err => {
-      responseClient(res);
-      return;
-    });
-};
-
 exports.delUser = (req, res) => {
   let { id } = req.body;
   User.deleteMany({ _id: id })
@@ -283,7 +186,7 @@ exports.getUserList = (req, res) => {
         name: 1,
         avatar: 1,
         phone: 1,
-        introduce: 1,
+        introduction: 1,
         type: 1,
         create_time: 1,
       };

@@ -1,7 +1,7 @@
 import crypto from 'crypto';
 
 module.exports = {
-	MD5_SUFFIX: 'www.biaochenxuying.cn*&^%$#',
+	MD5_SUFFIX: '', // 这个不要变动，否则密码全部失效
 	md5: function(pwd) {
 		let md5 = crypto.createHash('md5');
 		return md5.update(pwd).digest('hex');
