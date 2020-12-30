@@ -6,7 +6,6 @@
  */
 
 const { mongoose } = require('../core/mongodb.js');
-const autoIncrement = require('mongoose-auto-increment');
 
 // 文章模型
 const articleSchema = new mongoose.Schema({
@@ -92,14 +91,6 @@ const articleSchema = new mongoose.Schema({
 
 	// 最后修改日期
 	update_time: { type: Date, default: Date.now },
-});
-
-// 自增 ID 插件配置
-articleSchema.plugin(autoIncrement.plugin, {
-	model: 'Article',
-	field: 'id',
-	startAt: 1,
-	incrementBy: 1,
 });
 
 // 文章模型
