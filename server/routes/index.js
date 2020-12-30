@@ -27,12 +27,12 @@ module.exports = app => {
 	// app.post('/changeThirdComment', comment.changeThirdComment);
 	// app.get('/getCommentList', comment.getCommentList);
 
-	// app.post('/addArticle', article.addArticle);
+	app.post('/addArticle', article.addArticle);
 	// app.post('/updateArticle', article.updateArticle);
 	// app.post('/delArticle', article.delArticle);
-	// app.get('/getArticleList', article.getArticleList);
+	app.get('/getArticleList', article.getArticleList);
 	// app.get('/getArticleListAdmin', article.getArticleListAdmin);
-	// app.post('/getArticleDetail', article.getArticleDetail);
+	app.post('/getArticleDetail', article.getArticleDetail);
 	// app.post('/likeArticle', article.likeArticle);
 
 	// app.post('/addTag', tag.addTag);
