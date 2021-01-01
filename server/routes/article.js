@@ -142,7 +142,11 @@ exports.getArticleList = (req, res) => {
   let area = req.query.area || '';
   let university = req.query.university || '';
   let major = req.query.major || '';
-  let views = req.query.meta.views || '';
+  let meta = req.query.meta;
+  let views = '';
+  if (meta) {
+    views = meta.views;
+  }
   // let article = req.query.article || '';
   let pageNum = parseInt(req.query.pageNum) || 1;
   let pageSize = parseInt(req.query.pageSize) || 10;
