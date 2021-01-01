@@ -2,7 +2,7 @@
 *所有的路由接口
 */
 const user = require('./user');
-// const article = require('./article');
+const article = require('./article');
 // const comment = require('./comment');
 // const message = require('./message');
 // const tag = require('./tag');

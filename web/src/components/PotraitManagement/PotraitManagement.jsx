@@ -92,7 +92,7 @@ class Details extends Component {
             <div>
                 <div className="management-box">
                     <div className="box-header">我的档案</div>
-                    <MyResume/>
+                                    qw¸¸¸¸¸¸¸¸¸W3A# Z
                 </div>
                 <div className="action">
                     <button className="submit_file">提交</button>
