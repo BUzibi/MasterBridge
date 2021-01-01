@@ -6,14 +6,20 @@ import './ArticleCard.scss';
 class ArticleCard extends Component {
     static propTypes = {
         item: PropTypes.object,
+        history: PropTypes.object,
     };
     
+    goDetail = () => {
+        const {item: {_id}, history} = this.props;
+        history.push(`/article/${_id}`);
+    };
+
     render() {
         const {item} = this.props;
         const {area, create_time, desc, img_url, major, meta, title, university, _id} = item;
         const {views} = meta || {};
         return (
-            <div className="article-card">
+            <div className="article-card" onClick={this.goDetail}>
                 <div className="article-card_content">
                     <div className="content">
                         <div className="article">

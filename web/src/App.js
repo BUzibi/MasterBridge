@@ -10,7 +10,7 @@ import Experience from './components/Experience/Experience';
 import Postgraduate from './components/Postgraduate/Postgraduate';
 import Master from './components/Master/Master';
 import User from './components/User/User';
-// import Article from './components/Article/article';
+import Article from './components/Article/Article';
 import SummerCamp from './components/SummerCamp/SummerCamp';
 import PreLaunch from './components/PreLaunch/PreLaunch';
 import PotraitManagement from './components/PotraitManagement/PotraitManagement';
@@ -45,9 +45,9 @@ export default class App extends Component {
 					<Route path="/user">
 						<User />
 					</Route>
-					{/* <Route path="/article/:id">
+					<Route path="/article/:id">
 						<Article />
-					</Route> */}
+					</Route>
 					<Route path="/potraitmanagement">
 						<PotraitManagement />
 					</Route>

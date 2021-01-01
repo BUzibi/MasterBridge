@@ -32,7 +32,7 @@ module.exports = app => {
 	// app.post('/delArticle', article.delArticle);
 	app.get('/getArticleList', article.getArticleList);
 	// app.get('/getArticleListAdmin', article.getArticleListAdmin);
-	app.post('/getArticleDetail', article.getArticleDetail);
+	app.get('/getArticleDetail', article.getArticleDetail);
 	// app.post('/likeArticle', article.likeArticle);
 
 	// app.post('/addTag', tag.addTag);

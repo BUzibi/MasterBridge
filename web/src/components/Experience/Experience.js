@@ -9,7 +9,7 @@ import {
 } from "react-router-dom";
 import { connect } from 'react-redux';
 import { getArticleList } from 'store/actions/experience';
-
+import {withRouter} from 'react-router-dom';
 @connect(state => ({
     list: state.experience.list,
 }), dispatch => ({
@@ -161,11 +161,11 @@ class Experience extends Component {
     }
 
     renderArticleList() {
-        const {list} = this.props;
+        const {list, history} = this.props;
         return (
             <div className="card_list">
                 <div className="card_list-content">
-                    {list.map((item) => <ArticleCard key={item._id} item={item}/>)}
+                    {list.map((item) => <ArticleCard key={item._id} item={item} history={history}/>)}
                 </div>
             </div>
         );
@@ -205,4 +205,4 @@ class Experience extends Component {
     }
 }
 
-export default Experience;
+export default withRouter(Experience);
