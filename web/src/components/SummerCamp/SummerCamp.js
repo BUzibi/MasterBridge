@@ -16,7 +16,6 @@ import AnnouncementCard from 'components/AnnouncementCard/AnnouncementCard';
 }), dispatch => ({
     getAnnouncementList: () => dispatch(getAnnouncementList()),
 }))
-
 class SummerCamp extends Component {
     static propTypes = {
         list: PropTypes.array,
@@ -66,7 +65,7 @@ class SummerCamp extends Component {
                                 </div>
                             </div>
                             <div className="message-list">
-                                
+                                {this.renderAnnouncementList()}
                             </div>
                         </div>
                     </div>

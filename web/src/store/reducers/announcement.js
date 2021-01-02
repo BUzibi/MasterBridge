@@ -1,12 +1,17 @@
 import * as types from '../types';
 
+// const initialState = {
+//     title: '',
+//     university: '',
+//     school: '',
+//     ann_url: '',
+//     type: '',
+//     publish_time: '',
+// };
+
 const initialState = {
-    title: '',
-    university: '',
-    school: '',
-    ann_url: '',
-    type: '',
-    publish_time: '',
+    count: 0,
+    list: [],
 };
 
 export default (state = initialState, action) => {

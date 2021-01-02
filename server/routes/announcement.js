@@ -9,6 +9,7 @@ exports.addAnnouncement = (req, res) => {
   // }
   const {
     title,
+    keyword,
     university,
     school,
     ann_url,
@@ -18,6 +19,7 @@ exports.addAnnouncement = (req, res) => {
   let tempAnnouncement = null;
   tempAnnouncement = new Announcement({
     title,
+    keyword: keyword ? keyword.split(',') : [],
     university,
     school,
     ann_url,
@@ -44,12 +46,20 @@ exports.getAnnouncementList = (req, res) => {
   let school = req.query.school || '';
   let ann_url = req.query.ann_url || '';
   let type = req.query.type || '';
+  let keyword = req.query.keyword || null;
   let pageNum = parseInt(req.query.pageNum) || 1;
   let pageSize = parseInt(req.query.pageSize) || 10;
 
   let conditions = {};
+ 
   if (type) {
     conditions.type = type
+  }
+  if (keyword) {
+    const reg = new RegExp(keyword, 'i'); //不区分大小写
+    conditions = {
+      $or: [{ title: { $regex: reg } }, { university: { $regex: reg } }],
+    };
   }
 
 
@@ -89,5 +99,3 @@ exports.getAnnouncementList = (req, res) => {
     }
   });
 };
-
-

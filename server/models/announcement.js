@@ -11,7 +11,9 @@ const { mongoose } = require('../core/mongodb.js');
 const announcementSchema = new mongoose.Schema({
 	// 公告标题
 	title: { type: String, required: true, validate: /\S+/ },
-
+	//
+	// 公告关键字（SEO）
+	keyword: [{ type: String, default: '' }],
 
 	//大学
 	university: {type: String, required: true},
