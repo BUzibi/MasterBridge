@@ -11,3 +11,6 @@ export const apiGetArticleDetail = (params) => { return Http.get('/getArticleDet
 
 // 获取通告列表
 export const apiGetAnnouncementList = (params) => { return Http.get('/getAnnouncementList', { params }) }
+
+// 获取标签列表
+export const apiGetTagList = (params) => { return Http.get('/getTagList', { params }) }

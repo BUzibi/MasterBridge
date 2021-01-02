@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
 import './SummerCamp.scss';
 import DefaultLayout from 'layouts/DefaultLayout';
+import Input from 'components/Input/Input';
 import makepotrait from 'components/icon/makepotrait.png';
 import {
     Link
 } from "react-router-dom";
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { getAnnouncementList } from 'store/actions/announcement';
+import { getAnnouncementList, typeChange, keywordChange } from 'store/actions/announcement';
 import {withRouter} from 'react-router-dom';
 import AnnouncementCard from 'components/AnnouncementCard/AnnouncementCard';
 
@@ -15,17 +16,21 @@ import AnnouncementCard from 'components/AnnouncementCard/AnnouncementCard';
     list: state.announcement.list,
 }), dispatch => ({
     getAnnouncementList: () => dispatch(getAnnouncementList()),
+    typeChange: (type) => dispatch(typeChange(type)),
+    keywordChange: (keyword) => dispatch(keywordChange(keyword)),
 }))
 class SummerCamp extends Component {
     static propTypes = {
         list: PropTypes.array,
 
         getArticleList: PropTypes.func,
+        typeChange: PropTypes.func,
+        keywordChange: PropTypes.func,
     };
 
     componentDidMount() {
-        const { getAnnouncementList } = this.props;
-        getAnnouncementList();
+        const { typeChange } = this.props;
+        typeChange(1);
     }
 
     renderAnnouncementList() {
@@ -41,6 +46,7 @@ class SummerCamp extends Component {
 
 
     render() {
+        const {keywordChange} = this.props;
         return (
             <DefaultLayout className='summercamp'>
                 <div className="filter">
@@ -59,7 +65,8 @@ class SummerCamp extends Component {
                                     <img className="search-icon" alt="" />
                                     <div className="text-input">
                                         <div className="input-wrap-border">
-                                            <input type="text" placeholder="搜索" className="input-class" />
+                                            <Input type="text" placeholder="搜索" className="input-class"
+                                                onChange={(value) => keywordChange(value)}/>
                                         </div>
                                     </div>
                                 </div>

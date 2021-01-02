@@ -68,7 +68,7 @@ exports.getAnnouncementList = (req, res) => {
     count: 0,
     list: [],
   };
-  Announcement.countDocuments({}, (err, count) => {
+  Announcement.countDocuments(conditions, (err, count) => {
     if (err) {
       console.log('Error:' + err);
     } else {

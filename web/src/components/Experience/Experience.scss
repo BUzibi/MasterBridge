@@ -46,13 +46,7 @@
     margin: 60px auto 60px auto;
     padding-left: 60px ;
   }
-  
-  .tag_wrap {
-    margin: 0 16px 16px 0;
-    display: inline-block;
-    text-decoration: none;
-  }
-  
+ 
   a {
     color: #2196f3;
     cursor: pointer;
@@ -61,17 +55,6 @@
     -o-transition: none 86ms ease-out;
     transition: none 86ms ease-out;
     background-color: transparent;
-  }
-  
-  .tag {
-    padding: 0 10px;
-    font-size: 12px;
-    line-height: 1.67;
-    border-radius: 10px;
-    color: #424242;
-    background-color: #f4f4f4;
-    display: flex;
-    align-items: center;
   }
   
   .tabs_wrap {

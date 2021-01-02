@@ -6,7 +6,7 @@ const article = require('./article');
 const announcement = require('./announcement');
 // const comment = require('./comment');
 // const message = require('./message');
-// const tag = require('./tag');
+const tag = require('./tag');
 // const link = require('./link');
 // const category = require('./category');
 // const timeAxis = require('./timeAxis');
@@ -40,9 +40,9 @@ module.exports = app => {
 	app.get('/getAnnouncementList', announcement.getAnnouncementList);
 
 
-	// app.post('/addTag', tag.addTag);
+	app.post('/addTag', tag.addTag);
 	// app.post('/delTag', tag.delTag);
-	// app.get('/getTagList', tag.getTagList);
+	app.get('/getTagList', tag.getTagList);
 
 	// app.post('/addMessage', message.addMessage);
 	// app.post('/addReplyMessage', message.addReplyMessage);
