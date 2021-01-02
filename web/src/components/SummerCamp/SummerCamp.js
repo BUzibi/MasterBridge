@@ -5,8 +5,41 @@ import makepotrait from 'components/icon/makepotrait.png';
 import {
     Link
 } from "react-router-dom";
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { getAnnouncementList } from 'store/actions/announcement';
+import {withRouter} from 'react-router-dom';
+import AnnouncementCard from 'components/AnnouncementCard/AnnouncementCard';
 
-export default class SummerCamp extends Component {
+@connect(state => ({
+    list: state.announcement.list,
+}), dispatch => ({
+    getAnnouncementList: () => dispatch(getAnnouncementList()),
+}))
+
+class SummerCamp extends Component {
+    static propTypes = {
+        list: PropTypes.array,
+
+        getArticleList: PropTypes.func,
+    };
+
+    componentDidMount() {
+        const { getAnnouncementList } = this.props;
+        getAnnouncementList();
+    }
+
+    renderAnnouncementList() {
+        const {list, history} = this.props;
+        return (
+            <div className="card_list">
+                <div className="card_list-content">
+                    {list.map((item) => <AnnouncementCard key={item._id} item={item} history={history}/>)}
+                </div>
+            </div>
+        );
+    }
+
 
     render() {
         return (
@@ -33,46 +66,7 @@ export default class SummerCamp extends Component {
                                 </div>
                             </div>
                             <div className="message-list">
-                                <div className="message-card">
-                                    <div className="title-content">
-                                        <a className="card-title">2020北京大学光华学院预推免名单</a>
-                                    </div>
-                                    <div className="title-info">
-                                        <div className="university">北京大学  2020.06.23</div>
-                                    </div>
-                                </div>
-                                <div className="message-card">
-                                    <div className="title-content">
-                                        <a className="card-title">有关2020上海财经大学金融硕士夏令营通告</a>
-                                    </div>
-                                    <div className="title-info">
-                                        <div className="university">上海财经大学 2020.06.23</div>
-                                    </div>
-                                </div>
-                                <div className="message-card">
-                                    <div className="title-content">
-                                        <a className="card-title">预推免名单</a>
-                                    </div>
-                                    <div className="title-info">
-                                        <div className="university">清华大学  2020.06.23</div>
-                                    </div>
-                                </div>
-                                <div className="message-card">
-                                    <div className="title-content">
-                                        <a className="card-title">预推免名单</a>
-                                    </div>
-                                    <div className="title-info">
-                                        <div className="university">上海交通大学  2020.06.23</div>
-                                    </div>
-                                </div>
-                                <div className="message-card">
-                                    <div className="title-content">
-                                        <a className="card-title">预推免名单</a>
-                                    </div>
-                                    <div className="title-info">
-                                        <div className="university">复旦大学  2020.06.23</div>
-                                    </div>
-                                </div>
+                                
                             </div>
                         </div>
                     </div>
@@ -93,3 +87,5 @@ export default class SummerCamp extends Component {
         );
     }
 }
+
+export default withRouter(SummerCamp);

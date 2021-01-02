@@ -3,6 +3,7 @@
 */
 const user = require('./user');
 const article = require('./article');
+const announcement = require('./announcement');
 // const comment = require('./comment');
 // const message = require('./message');
 // const tag = require('./tag');
@@ -34,6 +35,10 @@ module.exports = app => {
 	// app.get('/getArticleListAdmin', article.getArticleListAdmin);
 	app.get('/getArticleDetail', article.getArticleDetail);
 	// app.post('/likeArticle', article.likeArticle);
+
+	app.post('/addAnnouncement', announcement.addAnnouncement);
+	app.get('/getAnnouncementList', announcement.getAnnouncementList);
+
 
 	// app.post('/addTag', tag.addTag);
 	// app.post('/delTag', tag.delTag);

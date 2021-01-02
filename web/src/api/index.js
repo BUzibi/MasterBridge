@@ -8,3 +8,6 @@ export const apiGetArticleList = (params) => { return Http.get('/getArticleList'
 
 // 获取文章详情
 export const apiGetArticleDetail = (params) => { return Http.get('/getArticleDetail', { params }) }
+
+// 获取通告列表
+export const apiGetAnnouncementList = (params) => { return Http.get('/getAnnouncementList', { params }) }
