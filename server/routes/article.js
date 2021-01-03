@@ -9,7 +9,7 @@ exports.addArticle = (req, res) => {
   // }
   const {
     title,
-    author,
+    author = 'zyy',
     // keyword,
     area,
     university,
