@@ -18,6 +18,7 @@ import Payment from './components/Payment/Payment';
 import MakePotrait from './components/MakePotrait/MakePotrait';
 import PotraitReport from './components/PotraitReport/PotraitReport';
 import Administrator from './components/Administrator/Administrator';
+import AddArticle from './components/AddArticle/AddArticle';
 
 export default class App extends Component {
 	render() {
@@ -62,6 +63,9 @@ export default class App extends Component {
 					</Route>
 					<Route path="/administrator">
 						<Administrator />
+					</Route>
+					<Route path="/addArticle">
+						<AddArticle />
 					</Route>
 				</Switch>
 			</Router>
