@@ -1,13 +1,13 @@
 import Article from '../models/article';
-import User from '../models/user';
 import { responseClient, timestampToTime } from '../util/util';
 
 exports.addArticle = (req, res) => {
-  // if (!req.session.userInfo) {
+  // if (!req.session.masterInfo) {
   // 	responseClient(res, 200, 1, '您还没登录,或者登录信息已过期，请重新登录！');
   // 	return;
-  // }
+  //}
   const {
+    master_id,
     title,
     author,
     // keyword,
@@ -26,6 +26,7 @@ exports.addArticle = (req, res) => {
   let tempArticle = null;
   if (img_url) {
     tempArticle = new Article({
+      master_id,
       title,
       author,
       // keyword: keyword ? keyword.split(',') : [],
@@ -44,6 +45,7 @@ exports.addArticle = (req, res) => {
     });
   } else {
     tempArticle = new Article({
+      master_id,
       title,
       author,
       // keyword: keyword ? keyword.split(',') : [],

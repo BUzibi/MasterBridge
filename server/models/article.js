@@ -9,6 +9,9 @@ const { mongoose } = require('../core/mongodb.js');
 
 // 文章模型
 const articleSchema = new mongoose.Schema({
+	// 研究生Id
+	//master_id: { type: String, required: true },
+
 	// 文章标题
 	title: { type: String, required: true, validate: /\S+/ },
 

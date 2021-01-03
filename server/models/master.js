@@ -1,6 +1,6 @@
 /**
- * Article model module.
- * @file 文章数据模型
+ * Master model module.
+ * @file 权限和研究生数据模型
  * @module model/master
  * @author biaochenxuying <https://github.com/biaochenxuying>
  */
@@ -34,11 +34,14 @@ const masterSchema = new mongoose.Schema({
 	// 研究生院校
 	MasterSchool: { type: String, required: true},
 
+	// 研究生院校城市
+	MasterArea: { type: String, required: true},
+
 	// 研究生专业
 	MasterMajor: { type: String, required: true},
 
 	// 毕业时间
-	EnrollmentData: { type: Date, required: true},
+	EnrollmentDate: { type: Date },
 
 	// 封面图
 	//img_url: { type: String, default: 'https://www.google.com/search?q=%E4%B8%8A%E6%B5%B7%E8%B4%A2%E7%BB%8F%E5%A4%A7%E5%AD%A6&source=lnms&tbm=isch&sa=X&ved=2ahUKEwj0rv3un_XtAhUBBKYKHT_iCDUQ_AUoA3oECAIQBQ&biw=1680&bih=971#imgrc=ME2PknjDKyLtPM' },

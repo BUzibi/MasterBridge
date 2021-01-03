@@ -1,10 +1,12 @@
 const fetch = require('node-fetch');
 const CONFIG = require('../app.config.js');
-const User = require('../models/master');
+
+import Article from '../models/article';
+import Master from '../models/master';
 import { MD5_SUFFIX, responseClient, md5 } from '../util/util.js';
 
-exports.register = (req, res) => {
-    let { name, password, UndergraduateSchool, UndergraduateMajor, MasterSchool, MasterMajor, EnrollmentData } = req.body;
+exports.masterRegister = (req, res) => {
+    let { name, password, UndergraduateSchool, UndergraduateMajor, MasterSchool, MasterArea, MasterMajor, EnrollmentDate } = req.body;
     if (!name) {
       responseClient(res, 400, 2, '用户名不可为空');
       return;
@@ -13,8 +15,28 @@ exports.register = (req, res) => {
       responseClient(res, 400, 2, '密码不可为空');
       return;
     }
+    if (!UndergraduateSchool) {
+      responseClient(res, 400, 2, '本科院校不可为空');
+      return;
+    }
+    if (!UndergraduateMajor) {
+      responseClient(res, 400, 2, '本科专业不可为空');
+      return;
+    }
+    if (!MasterSchool) {
+      responseClient(res, 400, 2, '研究生院校不可为空');
+      return;
+    }
+    if (!MasterArea) {
+      responseClient(res, 400, 2, '研究生院校城市不可为空');
+      return;
+    }
+    if (!MasterMajor) {
+      responseClient(res, 400, 2, '研究生专业不可为空');
+      return;
+    }
     //验证用户是否已经在数据库中
-    User.findOne({ name: name })
+    Master.findOne({ name: name })
       .then(data => {
         if (data) {
           responseClient(res, 200, 1, '用户已存在！');
@@ -27,8 +49,9 @@ exports.register = (req, res) => {
           UndergraduateSchool,
           UndergraduateMajor,
           MasterSchool,
+          MasterArea,
           MasterMajor,
-          EnrollmentData,
+          EnrollmentDate,
         });
         master.save().then(data => {
           responseClient(res, 200, 0, '注册成功', data);
@@ -40,7 +63,7 @@ exports.register = (req, res) => {
       });
   };
   
-  exports.login = (req, res) => {
+  exports.masterLogin = (req, res) => {
     let { name, password } = req.body;
     if (!name) {
       responseClient(res, 400, 2, '用户名不可为空');
@@ -50,15 +73,15 @@ exports.register = (req, res) => {
       responseClient(res, 400, 2, '密码不可为空');
       return;
     }
-    User.findOne({
+    Master.findOne({
       name,
       password: md5(password + MD5_SUFFIX),
     })
-      .then(userInfo => {
-        if (userInfo) {
+      .then(masterInfo => {
+        if (masterInfo) {
           //登录成功后设置session
-          req.session.userInfo = userInfo;
-          responseClient(res, 200, 0, '登录成功', userInfo);
+          req.session.masterInfo = masterInfo;
+          responseClient(res, 200, 0, '登录成功', masterInfo);
         } else {
           responseClient(res, 400, 1, '用户名或者密码错误');
         }
@@ -69,144 +92,193 @@ exports.register = (req, res) => {
   };
   
   //用户验证
-  exports.userInfo = (req, res) => {
-    if (req.session.userInfo) {
-      responseClient(res, 200, 0, '', req.session.userInfo);
+  exports.masterInfo = (req, res) => {
+    if (req.session.masterInfo) {
+      responseClient(res, 200, 0, '', req.session.masterInfo);
     } else {
-      responseClient(res, 200, 1, '请重新登录', req.session.userInfo);
+      responseClient(res, 200, 1, '请重新登录', req.session.masterInfo);
     }
   };
-  
-  //后台当前用户
-  exports.currentUser = (req, res) => {
-    let user = req.session.userInfo;
-    if (user) {
-      user.avatar = 'http://p61te2jup.bkt.clouddn.com/WechatIMG8.jpeg';
-      user.notifyCount = 0;
-      user.address = '广东省';
-      user.country = 'China';
-      user.group = 'BiaoChenXuying';
-      (user.title = '交互专家'), (user.signature = '海纳百川，有容乃大');
-      user.tags = [];
-      user.geographic = {
-        province: {
-          label: '广东省',
-          key: '330000',
-        },
-        city: {
-          label: '广州市',
-          key: '330100',
-        },
-      };
-      responseClient(res, 200, 0, '', user);
-    } else {
-      responseClient(res, 200, 1, '请重新登录', user);
-    }
-  };
-  
+
   exports.logout = (req, res) => {
-    if (req.session.userInfo) {
-      req.session.userInfo = null; // 删除session
-      responseClient(res, 200, 0, '登出成功！！');
+    if (req.session.masterInfo) {
+      req.session.masterInfo = null; // 删除session
+      responseClient(res, 200, 0, '退出成功！！');
     } else {
       responseClient(res, 200, 1, '您还没登录！！！');
     }
   };
-  
-  exports.loginAdmin = (req, res) => {
-    let { email, password } = req.body;
-    if (!email) {
-      responseClient(res, 400, 2, '用户邮箱不可为空');
-      return;
-    }
-    if (!password) {
-      responseClient(res, 400, 2, '密码不可为空');
-      return;
-    }
-    User.findOne({
-      email,
-      password: md5(password + MD5_SUFFIX),
-    })
-      .then(userInfo => {
-        if (userInfo) {
-          if (userInfo.type === 0) {
-            //登录成功后设置session
-            req.session.userInfo = userInfo;
-            responseClient(res, 200, 0, '登录成功', userInfo);
-          } else {
-            responseClient(res, 403, 1, '只有管理员才能登录后台！');
-          }
-        } else {
-          responseClient(res, 400, 1, '用户名或者密码错误');
-        }
-      })
-      .catch(err => {
-        responseClient(res);
-      });
+
+  // 前台文章列表
+exports.getArticleListByMasterID = (req, res) => {
+  if (!req.session.masterInfo) {
+    responseClient(res, 200, 1, '您还没登录,或者登录信息已过期，请重新登录！');
+    return;
+  }
+  let author = req.session.masterInfo.name;
+  let meta = req.query.meta;
+  let views = '';
+  if (meta) {
+    views = meta.views;
+  }
+  // let article = req.query.article || '';
+  let pageNum = parseInt(req.query.pageNum) || 1;
+  let pageSize = parseInt(req.query.pageSize) || 10;
+
+  let skip = pageNum - 1 < 0 ? 0 : (pageNum - 1) * pageSize;
+  let responseData = {
+    count: 0,
+    list: [],
   };
-  
-  exports.delUser = (req, res) => {
-    let { id } = req.body;
-    User.deleteMany({ _id: id })
-      .then(result => {
-        if (result.n === 1) {
-          responseClient(res, 200, 0, '用户删除成功!');
-        } else {
-          responseClient(res, 200, 1, '用户不存在');
-        }
-      })
-      .catch(err => {
-        responseClient(res);
-      });
-  };
-  
-  exports.getUserList = (req, res) => {
-    let keyword = req.query.keyword || '';
-    let pageNum = parseInt(req.query.pageNum) || 1;
-    let pageSize = parseInt(req.query.pageSize) || 10;
-    let conditions = {};
-    if (keyword) {
-      const reg = new RegExp(keyword, 'i');
-      conditions = {
-        $or: [{ name: { $regex: reg } }, { email: { $regex: reg } }],
+  Article.countDocuments({}, (err, count) => {
+    if (err) {
+      console.log('Error:' + err);
+    } else {
+      responseData.count = count-1;
+      // 待返回的字段
+      let fields = {
+        title: 1,
+        desc: 1,
+        img_url: 1,
+        area: 1,
+        university: 1,
+        major: 1,
+        // tags: 1,
+        // category: 1,
+        meta: 1,
+        create_time: 1,
+        views,
       };
-    }
-    let skip = pageNum - 1 < 0 ? 0 : (pageNum - 1) * pageSize;
-    let responseData = {
-      count: 0,
-      list: [],
-    };
-    User.countDocuments({}, (err, count) => {
-      if (err) {
-        console.error('Error:' + err);
-      } else {
-        responseData.count = count;
-        // 待返回的字段
-        let fields = {
-          _id: 1,
-          email: 1,
-          name: 1,
-          avatar: 1,
-          phone: 1,
-          introduction: 1,
-          type: 1,
-          create_time: 1,
-        };
-        let options = {
-          skip: skip,
-          limit: pageSize,
-          sort: { create_time: -1 },
-        };
-        User.find(conditions, fields, options, (error, result) => {
-          if (err) {
-            console.error('Error:' + error);
-            // throw error;
+      let options = {
+        skip: skip,
+        limit: pageSize,
+        sort: { create_time: -1 },
+      };
+      
+      Article.find({author:author}, fields, options, (error, result) => {
+        if (err) {
+          console.error('Error:' + error);
+          throw error;
+        } else {
+          responseData.list = result;
+          /*
+          if (views) {
+            // 根据浏览量  返回数据
+            result.sort((a, b) => {
+              return b.meta.create_time - a.meta.create_time;
+            });
+            responseData.list = result;
           } else {
             responseData.list = result;
-            responseClient(res, 200, 0, 'success', responseData);
           }
+          */
+          responseClient(res, 200, 0, '操作成功！', responseData);
+        }
+      });
+      
+    }
+  });
+};
+
+
+exports.addArticleByMasterID = (req, res) => {
+  if (!req.session.masterInfo) {
+  responseClient(res, 200, 1, '您还没登录,或者登录信息已过期，请重新登录！');
+  return;
+  }
+  let author = req.session.masterInfo.name;
+  let area = req.session.masterInfo.MasterArea;
+  let university = req.session.masterInfo.MasterSchool;
+  let major = req.session.masterInfo.MasterMajor;
+  let { title,desc,content,img_url, } = req.body;
+  Master.find({
+    name:author,
+  })
+  .then(result => {
+    // console.log('result :', result);
+    if (result) {
+        let tempArticle = new Article({
+          //master_id: result._id,
+          title: title,
+          area: area,
+          university: university,
+          major: major,
+          author: author,
+          desc: desc,
+          content: content,
+          img_url: img_url,
         });
-      }
+      tempArticle
+        .save()
+        .then(data => {
+          responseClient(res, 200, 0, '添加成功', data);
+        })
+        .catch(err => {
+          console.error('err :', err);
+          throw err;
+        });
+    } else {
+      responseClient(res, 200, 1, '用户不存在');
+    }
+  })
+  .catch(error => {
+    console.error('error :', error);
+    responseClient(res);
+  });
+};
+
+exports.updateArticle = (req, res) => {
+   if (!req.session.masterInfo) {
+  	responseClient(res, 200, 1, '您还没登录,或者登录信息已过期，请重新登录！');
+  	return;
+  }
+  let author = req.session.masterInfo.name;
+  let article_id = req.query.article_id;
+  // let area = req.session.masterInfo.MasterArea;
+  // let university = req.session.masterInfo.MasterSchool;
+  // let major = req.session.masterInfo.MasterMajor;
+  const {
+    title,
+    desc,
+    content,
+    img_url,
+  } = req.body;
+  Article.updateOne(
+    { author: author , _id:article_id},
+    {$set:{
+      title:title,
+      // area,
+      // university,
+      // major,
+      // author,
+      desc:desc,
+      content:content,
+      img_url:img_url,
+    }
+    }
+  )
+  Article.find({_id:article_id})
+    .then(result => {
+      responseClient(res, 200, 0, '操作成功', result);
+    })
+    .catch(err => {
+      console.error(err);
+      responseClient(res);
     });
-  };
-  
+};
+
+exports.delArticle = (req, res) => {
+  let { author } = req.body;
+  Article.deleteOne({ author: author })
+    .then(result => {
+      if (result.n === 1) {
+        responseClient(res, 200, 0, '删除成功!');
+      } else {
+        responseClient(res, 200, 1, '文章不存在');
+      }
+    })
+    .catch(err => {
+      console.error('err :', err);
+      responseClient(res);
+    });
+};

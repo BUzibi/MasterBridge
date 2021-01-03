@@ -3,6 +3,7 @@
 */
 const user = require('./user');
 const article = require('./article');
+const master = require('./master');
 // const comment = require('./comment');
 // const message = require('./message');
 // const tag = require('./tag');
@@ -20,6 +21,12 @@ module.exports = app => {
 	// app.post('/getUser', user.getUser);
 	// app.get('/currentUser', user.currentUser);
 	// app.get('/getUserList', user.getUserList);
+	app.post('/masterRegister', master.masterRegister);
+	app.post('/masterLogin', master.masterLogin);
+	app.post('/addArticleByMasterID',master.addArticleByMasterID);
+	app.post('/updateArticle',master.updateArticle);
+	app.post('/delArticle',master.delArticle);
+	app.get('/getArticleListByMasterID',master.getArticleListByMasterID);
 
 	// app.post('/addComment', comment.addComment);
 	// app.post('/addThirdComment', comment.addThirdComment);
