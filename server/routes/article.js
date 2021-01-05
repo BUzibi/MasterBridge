@@ -8,6 +8,7 @@ exports.addArticle = (req, res) => {
   // 	return;
   // }
   const {
+    _id,
     title,
     author = 'zyy',
     // keyword,
@@ -23,7 +24,35 @@ exports.addArticle = (req, res) => {
     // type,
     // origin,
   } = req.body;
+
+  if (_id) {
+    Article.updateOne({_id}, {
+      title,
+      author,
+      area,
+      university,
+      major,
+      content,
+      desc,
+      img_url,
+    }).then(result => {
+      Article.findOne({ _id }, (error, data) => {
+        if (error) {
+          console.error('Error:' + error);
+        } else {
+          responseClient(res, 200, 0, '操作成功', data);
+        }
+      })
+      
+    }).catch(err => {
+      console.error('err1:', err1);
+      responseClient(res);
+    });
+    return;
+  }
+
   let tempArticle = null;
+  
   tempArticle = new Article({
     title,
     author,
