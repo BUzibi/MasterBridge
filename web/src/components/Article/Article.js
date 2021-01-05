@@ -1,52 +1,46 @@
 import PropTypes from 'prop-types';
-import './index.less';
-import './marked.css';
+import './Article.scss';
 import React, { Component } from 'react';
 import DefaultLayout from 'layouts/DefaultLayout';
-import {withRouter} from 'react-router-dom';
-import { Icon } from 'antd';
-// import { Icon, Avatar, message, Button } from 'antd';
-import { message } from 'antd';
-import https from '../../utils/https';
-import urls from '../../utils/urls';
-import LoadingCom from '../loading/loading';
-import markdown from '../../utils/markdown.js';
-import {
-	getQueryStringByName,
-	timestampToTime,
-} from '../../utils/utils';
+import { withRouter } from 'react-router-dom';
+import ReactMarkdown from 'react-markdown';
+import "react-markdown-editor-lite/lib/index.css";
 import { connect } from 'react-redux';
 import { getArticleDetail } from 'store/actions/article';
 @connect(state => ({
-    article: state.article,
+	article: state.article,
 }), dispatch => ({
-    getArticleDetail: (id) => dispatch(getArticleDetail(id)),
+	getArticleDetail: (id) => dispatch(getArticleDetail(id)),
 }))
 class Article extends Component {
 	static propTypes = {
-        article: PropTypes.object,
+		article: PropTypes.object,
 
-        getArticleDetail: PropTypes.func,
+		getArticleDetail: PropTypes.func,
 	};
 
 	componentDidMount() {
-		const {match: {params}} = this.props;
-		const {id} = params;
-		const {getArticleDetail} = this.props;
+		const { match: { params } } = this.props;
+		const { id } = params;
+		const { getArticleDetail } = this.props;
 		getArticleDetail(id);
 	}
 
 
 	render() {
-		const {article} = this.props;
-		const {title, desc} = article || {};
-		let width = '100%';
-		const tagList = [];
+		const { article } = this.props;
+		const { title, desc, img_url, content, major, university } = article || {};
 		return (
-			<DefaultLayout>
-				<div>{title}</div>
-				<div>{desc}</div>
-				{/* <div className="article clearfix">
+			<DefaultLayout className="article_detail-page">
+				<div className="page-cover">
+					<img src={img_url} alt="封面图"/>
+				</div>
+				<div className="main-content">
+					<h1 className="page-title">{title}</h1>
+					<h2 className="page-desc">{desc}</h2>
+					<div className="profile"><small>{university} * {major}</small></div>
+					<ReactMarkdown className="custom-html-style" children={content} />
+					{/* <div className="article clearfix">
 					<div className="detail fl" style={{ width: width }}>
 						<div className="header">
 							<div className="title">{this.state.articleDetail.title}</div>
@@ -96,8 +90,9 @@ class Article extends Component {
 						</div>
 					</div>
 				</div> */}
+				</div>
 			</DefaultLayout>
-			
+
 		);
 	}
 }

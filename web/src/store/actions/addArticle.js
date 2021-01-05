@@ -1,5 +1,16 @@
 import * as types from 'store/types';
-import {apiAddArticle} from 'api';
+import {apiAddArticle, apiGetArticleDetail} from 'api';
+
+export const getArticle = (id) => {
+    return async (dispatch) => {
+        const data = await apiGetArticleDetail({id}) || {};
+        dispatch({
+            type: types.ADD_ARTICLE_GET_RECORD,
+            payload: { data },
+        });
+    };
+};
+
 
 
 export const addArticle = (history) => {
@@ -8,11 +19,13 @@ export const addArticle = (history) => {
             addArticle
         } = getState();
         const data = await apiAddArticle(addArticle);
-        dispatch({
-            type: types.ADD_ARTICLE,
-            payload: { article: data},
-        });
-        history.push(`/article/${data._id}`);
+        if (data) {
+            dispatch({
+                type: types.ADD_ARTICLE,
+                payload: { article: data},
+            });
+            history.push(`/article/${data._id}`);
+        }
     };
 };
 
@@ -21,6 +34,15 @@ export const addArticleTitle = (title) => {
         dispatch({
             type: types.ADDARTICLE_CHANGE_ADD_TITLE,
             payload: { title },
+        });
+    };
+};
+
+export const addArticleDesc = (desc) => {
+    return async (dispatch) => {
+        dispatch({
+            type: types.ADDARTICLE_CHANGE_ADD_DESC,
+            payload: { desc },
         });
     };
 };

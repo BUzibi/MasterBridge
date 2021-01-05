@@ -18,10 +18,20 @@ export default (state = initialState, action) => {
                 ...state,
                 ...payload.article,
             };
+        case types.ADD_ARTICLE_GET_RECORD:
+            return {
+                ...state,
+                ...payload.data,
+            };
         case types.ADDARTICLE_CHANGE_ADD_TITLE:
             return {
                 ...state,
                 title: payload.title,
+            };
+        case types.ADDARTICLE_CHANGE_ADD_DESC:
+            return {
+                ...state,
+                desc: payload.desc,
             };
         case types.ADDARTICLE_CHANGE_ADD_AREA:
             return {
