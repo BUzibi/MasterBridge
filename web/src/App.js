@@ -18,6 +18,10 @@ import Payment from './components/Payment/Payment';
 import MakePotrait from './components/MakePotrait/MakePotrait';
 import PotraitReport from './components/PotraitReport/PotraitReport';
 import Administrator from './components/Administrator/Administrator';
+import AddArticle from './components/AddArticle/AddArticle';
+import MasterLogin from './components/Master/MasterLogin';
+import ArticleManage from './components/ArticleManage/ArticleManage';
+import MasterRegister from './components/Master/MasterRegister';
 
 export default class App extends Component {
 	render() {
@@ -42,6 +46,9 @@ export default class App extends Component {
 					<Route path="/master">
 						<Master />
 					</Route>
+					<Route path="/MasterLogin">
+						<MasterLogin />
+					</Route>
 					<Route path="/user">
 						<User />
 					</Route>
@@ -62,6 +69,15 @@ export default class App extends Component {
 					</Route>
 					<Route path="/administrator">
 						<Administrator />
+					</Route>
+					<Route path="/addArticle">
+						<AddArticle />
+					</Route>
+					<Route path="/ArticleManage">
+						<ArticleManage />
+					</Route>
+					<Route path="/MasterRegister">
+						<MasterRegister />
 					</Route>
 				</Switch>
 			</Router>

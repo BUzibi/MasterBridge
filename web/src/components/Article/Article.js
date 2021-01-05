@@ -36,7 +36,6 @@ class Article extends Component {
 		getArticleDetail(id);
 	}
 
-
 	render() {
 		const {article} = this.props;
 		const {title, desc} = article || {};

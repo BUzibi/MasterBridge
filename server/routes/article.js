@@ -9,7 +9,7 @@ exports.addArticle = (req, res) => {
   const {
     master_id,
     title,
-    author,
+    author = 'zyy',
     // keyword,
     area,
     university,
@@ -198,7 +198,7 @@ exports.getArticleList = (req, res) => {
           throw error;
         } else {
           if (views) {
-            // 根据热度 likes 返回数据
+            // 根据浏览量views返回数据
             result.sort((a, b) => {
               return b.meta.views - a.meta.views;
             });

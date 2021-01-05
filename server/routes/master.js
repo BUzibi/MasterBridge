@@ -6,7 +6,7 @@ import Master from '../models/master';
 import { MD5_SUFFIX, responseClient, md5 } from '../util/util.js';
 
 exports.masterRegister = (req, res) => {
-    let { name, password, UndergraduateSchool, UndergraduateMajor, MasterSchool, MasterArea, MasterMajor, EnrollmentDate } = req.body;
+    const { name, password, undergraduateSchool, undergraduateMajor, masterSchool, masterArea, masterMajor, enrollmentDate } = req.body;
     if (!name) {
       responseClient(res, 400, 2, '用户名不可为空');
       return;
@@ -15,23 +15,23 @@ exports.masterRegister = (req, res) => {
       responseClient(res, 400, 2, '密码不可为空');
       return;
     }
-    if (!UndergraduateSchool) {
+    if (!undergraduateSchool) {
       responseClient(res, 400, 2, '本科院校不可为空');
       return;
     }
-    if (!UndergraduateMajor) {
+    if (!undergraduateMajor) {
       responseClient(res, 400, 2, '本科专业不可为空');
       return;
     }
-    if (!MasterSchool) {
+    if (!masterSchool) {
       responseClient(res, 400, 2, '研究生院校不可为空');
       return;
     }
-    if (!MasterArea) {
+    if (!masterArea) {
       responseClient(res, 400, 2, '研究生院校城市不可为空');
       return;
     }
-    if (!MasterMajor) {
+    if (!masterMajor) {
       responseClient(res, 400, 2, '研究生专业不可为空');
       return;
     }
@@ -46,15 +46,16 @@ exports.masterRegister = (req, res) => {
         let master = new Master({
           name,
           password: md5(password + MD5_SUFFIX),
-          UndergraduateSchool,
-          UndergraduateMajor,
-          MasterSchool,
-          MasterArea,
-          MasterMajor,
-          EnrollmentDate,
+          undergraduateSchool,
+          undergraduateMajor,
+          masterSchool,
+          masterArea,
+          masterMajor,
+          enrollmentDate,
         });
-        master.save().then(data => {
-          responseClient(res, 200, 0, '注册成功', data);
+        master.save().then(masterInfo => {
+          req.session.masterInfo = masterInfo;
+          responseClient(res, 200, 0, '注册成功', masterInfo);
         });
       })
       .catch(err => {
@@ -64,7 +65,7 @@ exports.masterRegister = (req, res) => {
   };
   
   exports.masterLogin = (req, res) => {
-    let { name, password } = req.body;
+    const { name, password } = req.body;
     if (!name) {
       responseClient(res, 400, 2, '用户名不可为空');
       return;
@@ -87,30 +88,79 @@ exports.masterRegister = (req, res) => {
         }
       })
       .catch(err => {
+        console.log(err);
         responseClient(res);
       });
   };
   
-  //用户验证
-  exports.masterInfo = (req, res) => {
-    if (req.session.masterInfo) {
-      responseClient(res, 200, 0, '', req.session.masterInfo);
-    } else {
-      responseClient(res, 200, 1, '请重新登录', req.session.masterInfo);
-    }
-  };
+  // //用户验证
+  // exports.masterInfo = (req, res) => {
+  //   if (req.session.masterInfo) {
+  //     responseClient(res, 200, 0, '', req.session.masterInfo);
+  //   } else {
+  //     responseClient(res, 200, 1, '请重新登录', req.session.masterInfo);
+  //   }
+  // };
 
-  exports.logout = (req, res) => {
-    if (req.session.masterInfo) {
-      req.session.masterInfo = null; // 删除session
-      responseClient(res, 200, 0, '退出成功！！');
+  // exports.logout = (req, res) => {
+  //   if (req.session.masterInfo) {
+  //     req.session.masterInfo = null; // 删除session
+  //     responseClient(res, 200, 0, '退出成功！！');
+  //   } else {
+  //     responseClient(res, 200, 1, '您还没登录！！！');
+  //   }
+  // };
+
+//获取研究生信息
+exports.getMasterInfo = (req, res) => {
+  if (!req.session.masterInfo) {
+    responseClient(res, 200, 1, '您还没登录,或者登录信息已过期，请重新登录！');
+    return;
+  }
+  let id = req.query.id;
+  // if(!name){
+  //   responseClient(res, 200, 1, '您还没登录,或者登录信息已过期，请重新登录！');
+  //   return;
+  // }
+  Master.findOne({ _id: id}, (error, data) => {
+    if(error) {
+      console.error('Error:' + error);
+      throw error;
     } else {
-      responseClient(res, 200, 1, '您还没登录！！！');
-    }
-  };
+      responseClient(res, 200, 0, '获取成功！', data);
+    };
+  })
+  // let name = req.session.masterInfo.name;
+  // let password = req.session.masterInfo.password;
+  // let undergraduateSchool = req.session.masterInfo.undergraduateSchool;
+  // let undergraduateMajor = req.session.masterInfo.undergraduateMajor;
+  // let masterSchool = req.session.masterInfo.masterSchool;
+  // let masterArea = req.session.masterInfo.masterArea;
+  // let masterMajor = req.session.masterInfo.masterMajor;
+  // let enrollmentDate = req.session.masterInfo.enrollmentDate;
+  // let masterInfo = new Master ({
+  //   name,
+  //   password,
+  //   undergraduateSchool,
+  //   undergraduateMajor,
+  //   masterSchool,
+  //   masterArea,
+  //   masterMajor,
+  //   enrollmentDate,
+  // });
+  // if (masterInfo)
+  // {
+  //   responseClient(res, 200, 0, '获取成功', masterInfo);
+  // }
+  // else
+  // {
+  //   responseClient(res, 200, 1, '获取失败');
+  // }
+  
+}
 
   // 前台文章列表
-exports.getArticleListByMasterID = (req, res) => {
+exports.getArticleManageList = (req, res) => {
   if (!req.session.masterInfo) {
     responseClient(res, 200, 1, '您还没登录,或者登录信息已过期，请重新登录！');
     return;
@@ -138,15 +188,13 @@ exports.getArticleListByMasterID = (req, res) => {
       // 待返回的字段
       let fields = {
         title: 1,
-        desc: 1,
-        img_url: 1,
-        area: 1,
-        university: 1,
-        major: 1,
-        // tags: 1,
-        // category: 1,
-        meta: 1,
-        create_time: 1,
+        // desc: 1,
+        // img_url: 1,
+        // area: 1,
+        // university: 1,
+        // major: 1,
+        // meta: 1,
+        // create_time: 1,
         views,
       };
       let options = {

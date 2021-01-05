@@ -4,9 +4,11 @@
 const user = require('./user');
 const article = require('./article');
 const master = require('./master');
+
+const announcement = require('./announcement');
 // const comment = require('./comment');
 // const message = require('./message');
-// const tag = require('./tag');
+const tag = require('./tag');
 // const link = require('./link');
 // const category = require('./category');
 // const timeAxis = require('./timeAxis');
@@ -26,7 +28,8 @@ module.exports = app => {
 	app.post('/addArticleByMasterID',master.addArticleByMasterID);
 	app.post('/updateArticle',master.updateArticle);
 	app.post('/delArticle',master.delArticle);
-	app.get('/getArticleListByMasterID',master.getArticleListByMasterID);
+	app.get('/getArticleManageList',master.getArticleManageList);
+	app.get('/getMasterInfo',master.getMasterInfo);
 
 	// app.post('/addComment', comment.addComment);
 	// app.post('/addThirdComment', comment.addThirdComment);
@@ -42,9 +45,13 @@ module.exports = app => {
 	app.get('/getArticleDetail', article.getArticleDetail);
 	// app.post('/likeArticle', article.likeArticle);
 
-	// app.post('/addTag', tag.addTag);
+	app.post('/addAnnouncement', announcement.addAnnouncement);
+	app.get('/getAnnouncementList', announcement.getAnnouncementList);
+
+
+	app.post('/addTag', tag.addTag);
 	// app.post('/delTag', tag.delTag);
-	// app.get('/getTagList', tag.getTagList);
+	app.get('/getTagList', tag.getTagList);
 
 	// app.post('/addMessage', message.addMessage);
 	// app.post('/addReplyMessage', message.addReplyMessage);

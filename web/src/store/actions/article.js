@@ -1,6 +1,7 @@
 import * as types from 'store/types';
 import {apiGetArticleDetail} from 'api';
 
+
 export const getArticleDetail = (id) => {
     return async (dispatch) => {
         const data = await apiGetArticleDetail({id}) || {};

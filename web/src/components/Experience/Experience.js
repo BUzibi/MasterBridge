@@ -4,33 +4,97 @@ import './Experience.scss';
 import DefaultLayout from 'layouts/DefaultLayout';
 import jingyan from 'components/icon/jingyan.jpg';
 import ArticleCard from './ArticleCard/ArticleCard';
+import Tag from './Tag/Tag';
 import {
     Link
 } from "react-router-dom";
 import { connect } from 'react-redux';
-import { getArticleList } from 'store/actions/experience';
+import {
+    getArticleList, getTagList, tagAreaChange, tagUniversityChange,
+    tagMajorChange,
+} from 'store/actions/experience';
 import {withRouter} from 'react-router-dom';
+
+const tagTypes = [
+    {title: '地区', value: 'area'},
+    {title: '院校', value: 'university'},
+    {title: '专业', value: 'major'},
+];
+
 @connect(state => ({
+    query: state.experience.query,
+    tags: state.experience.tags,
     list: state.experience.list,
 }), dispatch => ({
     getArticleList: () => dispatch(getArticleList()),
+    getTagList: () => dispatch(getTagList()),
+    tagAreaChange: (area) =>  dispatch(tagAreaChange(area)),
+    tagUniversityChange: (university) =>  dispatch(tagUniversityChange(university)),
+    tagMajorChange: (major) =>  dispatch(tagMajorChange(major)),
 }))
 class Experience extends Component {
     static propTypes = {
+        query: PropTypes.object,
+        tags: PropTypes.array,
         list: PropTypes.array,
 
         getArticleList: PropTypes.func,
+        getTagList: PropTypes.func,
+        tagAreaChange: PropTypes.func,
+        tagUniversityChange: PropTypes.func,
+        tagMajorChange: PropTypes.func,
     };
 
     componentDidMount() {
-        const { getArticleList } = this.props;
+        const { getTagList, getArticleList } = this.props;
+        getTagList();
         getArticleList();
     }
 
+    onTagChange = (item, active) => {
+        const {tagAreaChange, tagUniversityChange, tagMajorChange} = this.props;
+        const {name, type} = item;
+        switch(type) {
+            case 'area':
+                tagAreaChange(active ? '' : name);
+                break;
+            case 'university':
+                tagUniversityChange(active ? '' : name);
+                break;
+            case 'major':
+                tagMajorChange(active ? '' : name);
+                break;
+        }
+    };
+
     renderTags() {
+        const {tags, query} = this.props;
         return (
             <div className="main_top">
-                <div className="category_card">
+                {tagTypes.map((type) => {
+                    const currentType = type.value;
+                    const typeTags = tags.filter(tag => tag.type === currentType);
+                    return (
+                        <div className="category_card" key={type.value}>
+                            <div className="category_top">
+                                <div className="icon_text">{type.title}</div>
+                            </div>
+                            <div className="category_bottom">
+                                {typeTags.map(tag => {
+                                    const currentTypeValue = query[currentType];
+                                    const active = tag.type === currentType && currentTypeValue === tag.name;
+                                    return (
+                                        <Tag key={tag._id}
+                                            item={tag}
+                                            active={active}
+                                            onClick={(item, active) => this.onTagChange(item, active)}/>
+                                    );
+                                })}
+                            </div>
+                        </div>
+                    );
+                })}
+                {/* <div className="category_card">
                     <div className="category_top">
                         <div className="icon_text">地区</div>
                     </div>
@@ -155,7 +219,7 @@ class Experience extends Component {
                             </div>
                         </a>
                     </div>
-                </div>
+                </div> */}
             </div>
         );
     }

@@ -6,14 +6,14 @@ import './Input.scss';
 class Input extends Component {
     static propTypes = {
         className: PropTypes.string,
-        type: PropTypes.oneOf(['text, number']),
+        //type: PropTypes.oneOf(['text, number']),
         value: PropTypes.any,
         onChange: PropTypes.func,
     };
 
-    static defaultProps = {
-        type: 'text',
-    };
+    //static defaultProps = {
+    //    type: ['text','number'],
+    //};
 
     onChange = (e) => {
         const {onChange} = this.props;
@@ -24,11 +24,11 @@ class Input extends Component {
     };
    
     render() {
-        const { className, value, type } = this.props;
+        const { className, value, type, onChange, ...otherProps } = this.props;
         return (
-            <input
+            <input {...otherProps}
                 className={ss(className)}
-                type={type}
+                //type={type}
                 value={value}
                 onChange={this.onChange}/>
         )

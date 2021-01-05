@@ -1,0 +1,135 @@
+.article-tabs {
+    margin-top: 24px;
+    margin-bottom: 40px;
+    .article-categories {
+        display: flex;
+        flex-direction: row;
+        font-family: Roboto;
+        font-size: 18px;
+        margin-top: 12px;
+        margin-bottom: 12px;
+        cursor: pointer;
+        .col {
+            width: 90px;
+            height: 48px;
+            &.active {
+                box-shadow: inset 0 -2px 0 0 #2196f3;
+                color: #2196f3;
+            }
+        }
+        .col+.col {
+            margin-left: 36px;
+        }
+    }
+}
+
+
+    .article-add {
+        color: white;
+        background-color:  rgb(51, 207, 51);
+        border: none;
+        padding: 15px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 4px 335px;
+        cursor: pointer;
+        border-radius: 8px;
+    }
+
+
+
+.article-contents {
+    /* visibility: hidden; */
+    overflow: hidden;
+    backface-visibility: hidden;
+    transform: translate3d(0, 0, 0);
+    transform-style: preserve-3d;
+}
+
+
+@keyframes moveFromRight {
+    from { transform: translateX(100%); }
+}
+
+@keyframes moveToLeft {
+    to { transform: translateX(-100%); }
+}
+
+#fundation {
+    form {
+        padding: 0 30px;
+    width: 100%;
+    // display: float;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    .fundation-message {
+        flex: 1;
+        width: 50%;
+        min-width: 50%; // 加入这两个后每个item的宽度就生效了
+        max-width: 50%;
+        margin: 0px 0px 5px;
+        span {
+            float: left;
+            width: 20%;
+            text-align: right;
+            padding-right: 10px;
+            margin-top: 10px;
+            color: #969696;
+            font-size: 18px;
+        }
+        input{
+            color: #555;
+            font-size: 18px;
+            width: 40%;
+            padding: 3px 0px 3px 5px;
+            margin-top: 2px;
+            margin-right: 6px;
+            margin-bottom: 16px;
+            border: 1px solid #e5e5e5;
+            background: #fbfbfb;
+            height: 30px;
+            line-height:20px;
+            outline: 0;
+            box-shadow: inset 1px 1px 2px rgba(200,200,200,0.2);
+        }
+    }
+
+    .button {
+        box-shadow:inset 0px 1px 0px 0px #fbafe3;
+        background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #ff5bb0), color-stop(1, #ef027d) );
+        background:-moz-linear-gradient( center top, #ff5bb0 5%, #ef027d 100% );
+        filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff5bb0', endColorstr='#ef027d');
+        background-color:#ff5bb0;
+        border-radius: 9px;
+        -webkit-border-radius:9px;
+        -moz-border-border-radius:9px;
+        border:1px solid #ee1eb5;
+        display:inline-block;
+        color:#ffffff;
+        font-family:Arial;
+        font-size:15px;
+        font-weight:bold;
+        font-style:normal;
+        height: 40px;
+        line-height: 30px;
+        width:100px;
+        text-decoration:none;
+        text-align:center;
+        text-shadow:1px 1px 0px #c70067;
+        &:hover {
+            background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #ef027d), color-stop(1, #ff5bb0) );
+            background:-moz-linear-gradient( center top, #ef027d 5%, #ff5bb0 100% );
+            filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ef027d', endColorstr='#ff5bb0');
+            background-color:#ef027d;
+        }
+        &:active {
+            position:relative;
+            top:1px;
+        }
+    }
+
+    }
+}

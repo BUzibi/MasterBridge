@@ -26,22 +26,22 @@ const masterSchema = new mongoose.Schema({
 	  },
 
 	//本科毕业院校
-	UndergraduateSchool: {type: String, required: true},
+	undergraduateSchool: {type: String, required: true},
 
 	//本科专业
-	UndergraduateMajor: {type: String, required: true},
+	undergraduateMajor: {type: String, required: true},
 
 	// 研究生院校
-	MasterSchool: { type: String, required: true},
+	masterSchool: { type: String, required: true},
 
 	// 研究生院校城市
-	MasterArea: { type: String, required: true},
+	masterArea: { type: String, required: true},
 
 	// 研究生专业
-	MasterMajor: { type: String, required: true},
+	masterMajor: { type: String, required: true},
 
 	// 毕业时间
-	EnrollmentDate: { type: Date },
+	enrollmentDate: { type: Date },
 
 	// 封面图
 	//img_url: { type: String, default: 'https://www.google.com/search?q=%E4%B8%8A%E6%B5%B7%E8%B4%A2%E7%BB%8F%E5%A4%A7%E5%AD%A6&source=lnms&tbm=isch&sa=X&ved=2ahUKEwj0rv3un_XtAhUBBKYKHT_iCDUQ_AUoA3oECAIQBQ&biw=1680&bih=971#imgrc=ME2PknjDKyLtPM' },
