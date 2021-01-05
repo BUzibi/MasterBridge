@@ -24,9 +24,9 @@ class Input extends Component {
     };
    
     render() {
-        const { className, value, type } = this.props;
+        const { className, value, type, onChange, ...otherProps } = this.props;
         return (
-            <input
+            <input {...otherProps}
                 className={ss(className)}
                 type={type}
                 value={value}

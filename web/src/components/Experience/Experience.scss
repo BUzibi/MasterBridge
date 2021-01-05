@@ -4,7 +4,7 @@
   }
   
   .main_top .category_card {
-    width: 285px;
+    width: 325px;
     min-height: 152px;
     height: auto;
     -webkit-border-radius: 6px;
@@ -12,7 +12,7 @@
     -webkit-box-shadow: 0 0 14px 0 rgba(0,0,0,0.1);
     box-shadow: 0 0 14px 0 rgba(0,0,0,0.1);
     background-color: #ffffff;
-    margin-right: 30px;
+    margin-right: 40px;
     position: relative;
   }
   
@@ -46,13 +46,7 @@
     margin: 60px auto 60px auto;
     padding-left: 60px ;
   }
-  
-  .tag_wrap {
-    margin: 0 16px 16px 0;
-    display: inline-block;
-    text-decoration: none;
-  }
-  
+ 
   a {
     color: #2196f3;
     cursor: pointer;
@@ -61,17 +55,6 @@
     -o-transition: none 86ms ease-out;
     transition: none 86ms ease-out;
     background-color: transparent;
-  }
-  
-  .tag {
-    padding: 0 10px;
-    font-size: 12px;
-    line-height: 1.67;
-    border-radius: 10px;
-    color: #424242;
-    background-color: #f4f4f4;
-    display: flex;
-    align-items: center;
   }
   
   .tabs_wrap {
@@ -135,82 +118,13 @@
     width: 810px;
   }
   
-  .card {
+  .card_list {
     box-shadow: 0 0 14px 0 rgba(0,0,0,0.1);
     // margin-top: 40px;
   }
   
-  .card_content {
+  .card_list-content {
     padding: 0;
-  }
-  
-  .article_tile {
-    position: relative;
-    padding: 24px;
-    border-top: 1px solid #e6e6e6;
-  }
-  
-  /* .article_tile :not(:first-child) {
-    border-top: 1px solid #e6e6e6;
-  } */
-  
-  .tile_content  {
-    display:flex;
-    flex-direction: row;
-  }
-  
-  .content {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-  }
-  
-  .article {
-    display: flex;
-    flex-direction: column;
-    position: relative;
-    cursor: pointer;
-  }
-  
-  .title {
-    font-size: 20px;
-    font-weight: 500;
-    line-height: 1.4;
-    color: #000000;
-    margin-bottom: 12px;
-  }
-  
-  .subtitle {
-    font-size: 16px;
-    line-height: 1.5;
-    color: #424242;
-  }
-  
-  .action_group {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-  }
-  
-  .message {
-    font-size: 14px;
-    line-height: 1.43;
-    color: #757575;
-  }
-  
-  .thumbnail {
-    width: 240px;
-    height: 160px;
-    flex: 0 0 auto;
-    -webkit-border-radius: 6px;
-    border-radius: 6px;
-    margin-left: 24px;
-    background-color: white;
-    overflow: hidden;
-    display: flex;
-    align-items: center;
   }
   
   .place_holder {

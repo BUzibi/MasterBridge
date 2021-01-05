@@ -1,13 +1,54 @@
 import React, { Component } from 'react';
 import './PreLaunch.scss';
 import DefaultLayout from 'layouts/DefaultLayout';
+import Input from 'components/Input/Input';
 import makepotrait from 'components/icon/makepotrait.png';
+import {
+    Link
+} from "react-router-dom";
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { getAnnouncementList, typeChange, keywordChange } from 'store/actions/announcement';
+import {withRouter} from 'react-router-dom';
+import AnnouncementCard from 'components/AnnouncementCard/AnnouncementCard';
 
-export default class PreLaunch extends Component {
+@connect(state => ({
+    list: state.announcement.list,
+}), dispatch => ({
+    getAnnouncementList: () => dispatch(getAnnouncementList()),
+    typeChange: (type) => dispatch(typeChange(type)),
+    keywordChange: (keyword) => dispatch(keywordChange(keyword)),
+}))
+class PreLaunch extends Component {
+    static propTypes = {
+        list: PropTypes.array,
+
+        getArticleList: PropTypes.func,
+        typeChange: PropTypes.func,
+        keywordChange: PropTypes.func,
+    };
+
+    componentDidMount() {
+        const { typeChange } = this.props;
+        typeChange(2);
+    }
+
+    renderAnnouncementList() {
+        const {list, history} = this.props;
+        return (
+            <div className="card_list">
+                <div className="card_list-content">
+                    {list.map((item) => <AnnouncementCard key={item._id} item={item} history={history}/>)}
+                </div>
+            </div>
+        );
+    }
+
 
     render() {
+        const {keywordChange} = this.props;
         return (
-            <DefaultLayout className='prelaunch'>
+            <DefaultLayout className='summercamp'>
                 <div className="filter">
                     <div className="filter_content">
 
@@ -24,52 +65,14 @@ export default class PreLaunch extends Component {
                                     <img className="search-icon" alt="" />
                                     <div className="text-input">
                                         <div className="input-wrap-border">
-                                            <input type="text" placeholder="搜索" className="input-class" />
+                                            <Input type="text" placeholder="搜索" className="input-class"
+                                                onChange={(value) => keywordChange(value)}/>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             <div className="message-list">
-                                <div className="message-card">
-                                    <div className="title-content">
-                                        <a className="card-title">2020北京大学光华学院预推免名单</a>
-                                    </div>
-                                    <div className="title-info">
-                                        <div className="university">北京大学  2020.06.23</div>
-                                    </div>
-                                </div>
-                                <div className="message-card">
-                                    <div className="title-content">
-                                        <a className="card-title">有关2020上海财经大学金融硕士夏令营通告</a>
-                                    </div>
-                                    <div className="title-info">
-                                        <div className="university">上海财经大学 2020.06.23</div>
-                                    </div>
-                                </div>
-                                <div className="message-card">
-                                    <div className="title-content">
-                                        <a className="card-title">预推免名单</a>
-                                    </div>
-                                    <div className="title-info">
-                                        <div className="university">清华大学  2020.06.23</div>
-                                    </div>
-                                </div>
-                                <div className="message-card">
-                                    <div className="title-content">
-                                        <a className="card-title">预推免名单</a>
-                                    </div>
-                                    <div className="title-info">
-                                        <div className="university">上海交通大学  2020.06.23</div>
-                                    </div>
-                                </div>
-                                <div className="message-card">
-                                    <div className="title-content">
-                                        <a className="card-title">预推免名单</a>
-                                    </div>
-                                    <div className="title-info">
-                                        <div className="university">复旦大学  2020.06.23</div>
-                                    </div>
-                                </div>
+                                {this.renderAnnouncementList()}
                             </div>
                         </div>
                     </div>
@@ -77,10 +80,10 @@ export default class PreLaunch extends Component {
                         <div className="right-content">
                             <div className="action-wrap">
                                 <div className="top-wrap">
-                                    <div className="icon_item">
+                                    <Link to="/potraitmanagement" className="icon_item">
                                         <img className="icon_wrap" src={makepotrait} alt="" />
                                         <div className="icon_text">模拟画像</div>
-                                    </div>
+                                    </Link>
                                 </div>
                             </div>
                         </div>
@@ -90,3 +93,5 @@ export default class PreLaunch extends Component {
         );
     }
 }
+
+export default withRouter(PreLaunch);

@@ -19,6 +19,7 @@ import MakePotrait from './components/MakePotrait/MakePotrait';
 import PotraitReport from './components/PotraitReport/PotraitReport';
 import Administrator from './components/Administrator/Administrator';
 import Login from './components/Login/Login';
+import AddArticle from './components/AddArticle/AddArticle';
 
 export default class App extends Component {
 	render() {
@@ -66,6 +67,9 @@ export default class App extends Component {
 					</Route>
 					<Route path="/login">
 						<Login />
+					</Route>
+					<Route path="/addArticle">
+						<AddArticle />
 					</Route>
 				</Switch>
 			</Router>
