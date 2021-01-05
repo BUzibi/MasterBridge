@@ -1,19 +1,14 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import ss from 'classnames';
-import './Input.scss';
+import './Textarea.scss';
 
-class Input extends Component {
+class Textarea extends Component {
     static propTypes = {
         className: PropTypes.string,
-        type: PropTypes.oneOf(['text', 'number']),
         value: PropTypes.any,
         onChange: PropTypes.func,
     };
-
-    //static defaultProps = {
-    //    type: ['text','number'],
-    //};
 
     onChange = (e) => {
         const {onChange} = this.props;
@@ -24,15 +19,14 @@ class Input extends Component {
     };
    
     render() {
-        const { className, value, type, onChange, ...otherProps } = this.props;
+        const { className, value, onChange, ...otherProps } = this.props;
         return (
-            <input {...otherProps}
-                className={ss('custom-input', className)}
-                type={type}
+            <textarea {...otherProps}
+                className={ss(className)}
                 value={value}
                 onChange={this.onChange}/>
         )
     }
 }
 
-export default Input;
+export default Textarea;

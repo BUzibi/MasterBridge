@@ -24,44 +24,22 @@ exports.addArticle = (req, res) => {
     // origin,
   } = req.body;
   let tempArticle = null;
-  if (img_url) {
-    tempArticle = new Article({
-      master_id,
-      title,
-      author,
-      // keyword: keyword ? keyword.split(',') : [],
-      area,
-      university,
-      major,
-      content,
-      numbers: content.length,
-      desc,
-      img_url,
-      // tags: tags ? tags.split(',') : [],
-      // category: category ? category.split(',') : [],
-      // state,
-      // type,
-      // origin,
-    });
-  } else {
-    tempArticle = new Article({
-      master_id,
-      title,
-      author,
-      // keyword: keyword ? keyword.split(',') : [],
-      area,
-      university,
-      major,
-      content,
-      numbers: content.length,
-      desc,
-      // tags: tags ? tags.split(',') : [],
-      // category: category ? category.split(',') : [],
-      // state,
-      // type,
-      // origin,
-    });
-  }
+  tempArticle = new Article({
+    title,
+    author,
+    // keyword: keyword ? keyword.split(',') : [],
+    area,
+    university,
+    major,
+    content,
+    desc,
+    img_url,
+    // tags: tags ? tags.split(',') : [],
+    // category: category ? category.split(',') : [],
+    // state,
+    // type,
+    // origin,
+  });
 
   tempArticle
     .save()
@@ -195,7 +173,6 @@ exports.getArticleList = (req, res) => {
       Article.find(conditions, fields, options, (error, result) => {
         if (err) {
           console.error('Error:' + error);
-          throw error;
         } else {
           if (views) {
             // 根据浏览量views返回数据
@@ -224,7 +201,6 @@ exports.getArticleDetail = (req, res) => {
   Article.findOne({ _id: id }, (error, data) => {
     if (error) {
       console.error('Error:' + error);
-      throw error;
     } else {
       data.meta.views = data.meta.views + 1;
       Article.updateOne({ _id: id }, { meta: data.meta })
@@ -233,7 +209,6 @@ exports.getArticleDetail = (req, res) => {
         })
         .catch(err => {
           console.error('err :', err);
-          throw err;
         });
     }
   })

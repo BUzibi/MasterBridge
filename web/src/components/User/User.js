@@ -6,7 +6,7 @@ export default class User extends Component {
 
     render() {
         return (
-            <DefaultLayout className='user'>
+            <DefaultLayout className='user-page'>
                 <div className="hero clear"></div>
                 <div className="sidebar-navigation">
                     <nav className="clear">
