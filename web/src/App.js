@@ -19,6 +19,7 @@ import MakePotrait from './components/MakePotrait/MakePotrait';
 import PotraitReport from './components/PotraitReport/PotraitReport';
 import Administrator from './components/Administrator/Administrator';
 import Login from './components/Login/Login';
+import Register from './components/Register/Register';
 import AddArticle from './components/AddArticle/AddArticle';
 
 export default class App extends Component {
@@ -70,6 +71,9 @@ export default class App extends Component {
 					</Route>
 					<Route path="/addArticle">
 						<AddArticle />
+					</Route>
+					<Route path="/register">
+						<Register />
 					</Route>
 				</Switch>
 			</Router>
