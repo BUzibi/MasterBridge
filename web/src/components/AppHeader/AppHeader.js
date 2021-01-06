@@ -41,7 +41,7 @@ export default class AppHeader extends Component {
                 <div class="Login-header"> 
                     <div class="header-login">
                         <Link to="/login">登录 /</Link>
-                        <Link to="/login"> 退出</Link>
+                        <Link to="/register"> 注册</Link>
                     </div>
                 </div>
             </header>

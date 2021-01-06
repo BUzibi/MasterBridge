@@ -38,7 +38,7 @@
 
 .home-overlay
 {
-    height:130vh;
+    height:112vh;
     width:100vw;
     position:absolute;
     top:0;
@@ -57,20 +57,22 @@
 {
     font-size:4rem; 
     margin-bottom: 0;
+    text-align: center;
 }
 
 .home-content p 
 {
     font-size:1.5rem;
     padding-bottom: 2rem;
+    text-align: center;
 }
 
 .h2
 {
-    text-align: center;
+    text-align:justify;
     color:#2c3341;
-    font-weight:700;
-    margin-bottom: 3rem;
+    font-size: medium;
+    font-weight:100;
 }
 
 .btn
@@ -83,7 +85,7 @@
 
 .fuction-section
 {
-    background-color: #34b3a0;
+    background-color: #fff;
     width:100%;
     padding-right: 15px;
     padding-left:15px;

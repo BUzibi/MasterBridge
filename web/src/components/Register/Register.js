@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './Login.scss';
+import './Register.scss';
 import DefaultLayout from 'layouts/DefaultLayout';
 
 export default class User extends Component {
@@ -15,9 +15,9 @@ export default class User extends Component {
                         <div class='login-overlay'></div>
                         <div class="login-content">
                             <div class="autoform">
-                                <h1>登录</h1>
+                                <h1>注册</h1>
                                 <div class="subtitle">
-                                    <a href='register'>没有账户？ Start now for free</a>
+                                    <a href='experience'>已有账户？ Return to login</a>
                                     <br></br>
                                     <br></br>
                                 </div>
@@ -35,6 +35,14 @@ export default class User extends Component {
                                         <br></br>
                                     </div>
                                     <div class='form-group'>
+                                        <label class='control-label' for='user-name'>
+                                            用户姓名
+                                        </label>
+                                        <br></br>
+                                        <input id="user-name" class='form-control' name='session[name]' type='text'></input>
+                                    </div>
+                                    <br></br>
+                                    <div class='form-group'>
                                         <label class='control-label' for='user-password'>
                                             用户密码
                                         </label>
@@ -43,7 +51,7 @@ export default class User extends Component {
                                     </div>
                                     <br></br>
                                     <div class='btn-panel'>
-                                        <button class='btn' type='submit'>确认登录</button>
+                                        <button class='btn' type='submit'>确认注册</button>
                                     </div>
                                 </form>
                             </div>
