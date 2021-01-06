@@ -26,7 +26,6 @@ import ArticleManage from './components/ArticleManage/ArticleManage';
 import MasterRegister from './components/Master/MasterRegister';
 import UserLogin from './components/User/UserLogin';
 import UserRegister from './components/User/UserRegister';
-import Login from './components/Login/Login';
 
 export default class App extends Component {
 	render() {

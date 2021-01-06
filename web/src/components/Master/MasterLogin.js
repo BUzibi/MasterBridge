@@ -1,8 +1,6 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import './Master.scss';
-import 'components/AddArticle/index.less';
-import 'components/AddArticle/marked.css';
 import DefaultLayout from 'layouts/DefaultLayout';
 import MasterLayout from 'layouts/MasterLayout'
 import {withRouter} from 'react-router-dom';

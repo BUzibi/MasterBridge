@@ -1,7 +1,5 @@
 import PropTypes from 'prop-types';
 import './Master.scss';
-import 'components/AddArticle/index.less';
-import 'components/AddArticle/marked.css';
 import React, { Component } from 'react';
 import DefaultLayout from 'layouts/DefaultLayout';
 import {withRouter} from 'react-router-dom';
