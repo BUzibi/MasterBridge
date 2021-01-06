@@ -15,8 +15,8 @@ const tag = require('./tag');
 // const project = require('./project');
 
 module.exports = app => {
-	app.post('/register', user.register);
-	app.post('/login', user.login);
+	app.post('/userRegister', user.register);
+	app.post('/userLogin', user.login);
 	// app.post('/logout', user.logout);
 	// app.post('/loginAdmin', user.loginAdmin);
 	// app.post('/delUser', user.delUser);

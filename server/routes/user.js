@@ -5,7 +5,7 @@ const User = require('../models/user');
 import { MD5_SUFFIX, responseClient, md5 } from '../util/util.js';
 
 exports.register = (req, res) => {
-  let { name, type, password, introduction } = req.body;
+  let { name, password } = req.body;
   if (!name) {
     responseClient(res, 400, 2, '用户名不可为空');
     return;
@@ -25,8 +25,8 @@ exports.register = (req, res) => {
       let user = new User({
         name,
         password: md5(password + MD5_SUFFIX),
-        type,
-        introduction,
+        // type,
+        // introduction,
       });
       user.save().then(data => {
         responseClient(res, 200, 0, '注册成功', data);
@@ -102,108 +102,108 @@ exports.currentUser = (req, res) => {
   }
 };
 
-exports.logout = (req, res) => {
-  if (req.session.userInfo) {
-    req.session.userInfo = null; // 删除session
-    responseClient(res, 200, 0, '登出成功！！');
-  } else {
-    responseClient(res, 200, 1, '您还没登录！！！');
-  }
-};
+// exports.logout = (req, res) => {
+//   if (req.session.userInfo) {
+//     req.session.userInfo = null; // 删除session
+//     responseClient(res, 200, 0, '登出成功！！');
+//   } else {
+//     responseClient(res, 200, 1, '您还没登录！！！');
+//   }
+// };
 
-exports.loginAdmin = (req, res) => {
-  let { email, password } = req.body;
-  if (!email) {
-    responseClient(res, 400, 2, '用户邮箱不可为空');
-    return;
-  }
-  if (!password) {
-    responseClient(res, 400, 2, '密码不可为空');
-    return;
-  }
-  User.findOne({
-    email,
-    password: md5(password + MD5_SUFFIX),
-  })
-    .then(userInfo => {
-      if (userInfo) {
-        if (userInfo.type === 0) {
-          //登录成功后设置session
-          req.session.userInfo = userInfo;
-          responseClient(res, 200, 0, '登录成功', userInfo);
-        } else {
-          responseClient(res, 403, 1, '只有管理员才能登录后台！');
-        }
-      } else {
-        responseClient(res, 400, 1, '用户名或者密码错误');
-      }
-    })
-    .catch(err => {
-      responseClient(res);
-    });
-};
+// exports.loginAdmin = (req, res) => {
+//   let { email, password } = req.body;
+//   if (!email) {
+//     responseClient(res, 400, 2, '用户邮箱不可为空');
+//     return;
+//   }
+//   if (!password) {
+//     responseClient(res, 400, 2, '密码不可为空');
+//     return;
+//   }
+//   User.findOne({
+//     email,
+//     password: md5(password + MD5_SUFFIX),
+//   })
+//     .then(userInfo => {
+//       if (userInfo) {
+//         if (userInfo.type === 0) {
+//           //登录成功后设置session
+//           req.session.userInfo = userInfo;
+//           responseClient(res, 200, 0, '登录成功', userInfo);
+//         } else {
+//           responseClient(res, 403, 1, '只有管理员才能登录后台！');
+//         }
+//       } else {
+//         responseClient(res, 400, 1, '用户名或者密码错误');
+//       }
+//     })
+//     .catch(err => {
+//       responseClient(res);
+//     });
+// };
 
-exports.delUser = (req, res) => {
-  let { id } = req.body;
-  User.deleteMany({ _id: id })
-    .then(result => {
-      if (result.n === 1) {
-        responseClient(res, 200, 0, '用户删除成功!');
-      } else {
-        responseClient(res, 200, 1, '用户不存在');
-      }
-    })
-    .catch(err => {
-      responseClient(res);
-    });
-};
+// exports.delUser = (req, res) => {
+//   let { id } = req.body;
+//   User.deleteMany({ _id: id })
+//     .then(result => {
+//       if (result.n === 1) {
+//         responseClient(res, 200, 0, '用户删除成功!');
+//       } else {
+//         responseClient(res, 200, 1, '用户不存在');
+//       }
+//     })
+//     .catch(err => {
+//       responseClient(res);
+//     });
+// };
 
-exports.getUserList = (req, res) => {
-  let keyword = req.query.keyword || '';
-  let pageNum = parseInt(req.query.pageNum) || 1;
-  let pageSize = parseInt(req.query.pageSize) || 10;
-  let conditions = {};
-  if (keyword) {
-    const reg = new RegExp(keyword, 'i');
-    conditions = {
-      $or: [{ name: { $regex: reg } }, { email: { $regex: reg } }],
-    };
-  }
-  let skip = pageNum - 1 < 0 ? 0 : (pageNum - 1) * pageSize;
-  let responseData = {
-    count: 0,
-    list: [],
-  };
-  User.countDocuments({}, (err, count) => {
-    if (err) {
-      console.error('Error:' + err);
-    } else {
-      responseData.count = count;
-      // 待返回的字段
-      let fields = {
-        _id: 1,
-        email: 1,
-        name: 1,
-        avatar: 1,
-        phone: 1,
-        introduction: 1,
-        type: 1,
-        create_time: 1,
-      };
-      let options = {
-        skip: skip,
-        limit: pageSize,
-        sort: { create_time: -1 },
-      };
-      User.find(conditions, fields, options, (error, result) => {
-        if (err) {
-          console.error('Error:' + error);
-          // throw error;
-        } else {
-          responseData.list = result;
-          responseClient(res, 200, 0, 'success', responseData);
-        }
-      });
-    }
-  });
-};
+// exports.getUserList = (req, res) => {
+//   let keyword = req.query.keyword || '';
+//   let pageNum = parseInt(req.query.pageNum) || 1;
+//   let pageSize = parseInt(req.query.pageSize) || 10;
+//   let conditions = {};
+//   if (keyword) {
+//     const reg = new RegExp(keyword, 'i');
+//     conditions = {
+//       $or: [{ name: { $regex: reg } }, { email: { $regex: reg } }],
+//     };
+//   }
+//   let skip = pageNum - 1 < 0 ? 0 : (pageNum - 1) * pageSize;
+//   let responseData = {
+//     count: 0,
+//     list: [],
+//   };
+//   User.countDocuments({}, (err, count) => {
+//     if (err) {
+//       console.error('Error:' + err);
+//     } else {
+//       responseData.count = count;
+//       // 待返回的字段
+//       let fields = {
+//         _id: 1,
+//         email: 1,
+//         name: 1,
+//         avatar: 1,
+//         phone: 1,
+//         introduction: 1,
+//         type: 1,
+//         create_time: 1,
+//       };
+//       let options = {
+//         skip: skip,
+//         limit: pageSize,
+//         sort: { create_time: -1 },
+//       };
+//       User.find(conditions, fields, options, (error, result) => {
+//         if (err) {
+//           console.error('Error:' + error);
+//           // throw error;
+//         } else {
+//           responseData.list = result;
+//           responseClient(res, 200, 0, 'success', responseData);
+//         }
+//       });
+//     }
+//   });
+// };

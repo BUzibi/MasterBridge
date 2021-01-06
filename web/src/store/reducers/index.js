@@ -8,6 +8,8 @@ import master from './master';
 import masterLogin from './masterLogin';
 import masterRegister from './masterRegister';
 import getMasterInfo from './master';
+import userLogin from './userLogin';
+import userRegister from './userRegister';
 
 const rootReducer = combineReducers({
 	potraitmanagement,
@@ -19,6 +21,8 @@ const rootReducer = combineReducers({
 	masterLogin,
 	masterRegister,
 	getMasterInfo,
+	userLogin,
+	userRegister,
 })
 
 export default rootReducer;

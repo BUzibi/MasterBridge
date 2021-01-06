@@ -15,6 +15,12 @@ export const apiGetAnnouncementList = (params) => { return Http.get('/getAnnounc
 // 获取标签列表
 export const apiGetTagList = (params) => { return Http.get('/getTagList', { params }) }
 
+//用户注册
+export const apiUserRegister = (data) => { return Http.post('/userRegister', data ) }
+
+//用户登录
+export const apiUserLogin = (data) => { return Http.post('/userLogin', data ) }
+
 //研究生注册
 export const apiMasterRegister = (data) => { return Http.post('/masterRegister',  data ) }
 

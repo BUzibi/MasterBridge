@@ -12,7 +12,7 @@ export default class User extends Component {
                     <nav className="clear">
                         <ul>
                             <li className="Admin-login">
-                                <a className="login-btn">登录/注册</a>
+                                <a className="login-btn" href="UserLogin">登录/注册</a>
                             </li>
                             <li>
                                 <a className="selected">帐户设置</a>
@@ -34,17 +34,17 @@ export default class User extends Component {
                                     <div className="item clear">
                                         {/* ::before */}
                                         <div className="lbl">姓名</div>
-                                        <div className="val">Yuyan Zhang</div>
+                                        <div className="val">张语嫣</div>
                                     </div>
                                     <div className="item clear">
                                         {/* ::before */}
                                         <div className="lbl">账号</div>
-                                        <div className="val">fkjakjbc</div>
+                                        <div className="val">张语嫣</div>
                                     </div>
                                     <div className="item clear">
                                         {/* ::before */}
                                         <div className="lbl">密码</div>
-                                        <div className="val">wzywxy66</div>
+                                        <div className="val">123456</div>
                                     </div>
                                 </div>
                             </div>

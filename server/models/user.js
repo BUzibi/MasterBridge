@@ -14,7 +14,7 @@ const userSchema = new mongoose.Schema({
   name: { type: String, required: true, default: '' },
 
   //用户类型 0：普通用户，1：管理员
-  type: { type: Number, default: 0 },
+  // type: { type: Number, default: 0 },
 
   // 密码
   password: {
@@ -27,7 +27,7 @@ const userSchema = new mongoose.Schema({
   },
 
   // 自我介绍
-  introduction: { type: String, default: '' },
+  // introduction: { type: String, default: '' },
 
   // 创建日期
   create_time: { type: Date, default: Date.now },

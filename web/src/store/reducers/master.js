@@ -1,6 +1,7 @@
 import * as types from '../types';
 
 const initialState = {
+    _id: '',
     name: '',
     password: '',
     undergraduateSchool: '',

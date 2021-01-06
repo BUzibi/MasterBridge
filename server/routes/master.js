@@ -117,7 +117,7 @@ exports.getMasterInfo = (req, res) => {
     responseClient(res, 200, 1, '您还没登录,或者登录信息已过期，请重新登录！');
     return;
   }
-  let id = req.query.id;
+  let id = req.requery.id;
   // if(!name){
   //   responseClient(res, 200, 1, '您还没登录,或者登录信息已过期，请重新登录！');
   //   return;

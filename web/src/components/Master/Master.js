@@ -45,13 +45,13 @@ class Details extends Component {
                 <div className="masterinfo">
                     <div className="management-box">
                         <div className="box-header">个人信息</div>
-                        <p>姓名：{name}</p>
-                        <p>本科毕业院校：{undergraduateSchool}</p>
-                        <p>本科专业：{undergraduateMajor}</p>
-                        <p>研究生院校：{masterSchool}</p>
-                        <p>研究生院校城市：{masterArea}</p>
-                        <p>研究生专业：{masterMajor}</p>
-                        <p>毕业时间：{enrollmentDate}</p>
+                        <p>姓名：王心悦{name}</p>
+                        <p>本科毕业院校：上海财经大学{undergraduateSchool}</p>
+                        <p>本科专业：信息管理与信息系统{undergraduateMajor}</p>
+                        <p>研究生院校：上海财经大学{masterSchool}</p>
+                        <p>研究生院校城市：上海{masterArea}</p>
+                        <p>研究生专业：金融计量{masterMajor}</p>
+                        <p>毕业时间：2021-06-22{enrollmentDate}</p>
                     </div>
                 </div>
             </div>

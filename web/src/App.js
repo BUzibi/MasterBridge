@@ -22,6 +22,8 @@ import AddArticle from './components/AddArticle/AddArticle';
 import MasterLogin from './components/Master/MasterLogin';
 import ArticleManage from './components/ArticleManage/ArticleManage';
 import MasterRegister from './components/Master/MasterRegister';
+import UserLogin from './components/User/UserLogin';
+import UserRegister from './components/User/UserRegister';
 
 export default class App extends Component {
 	render() {
@@ -78,6 +80,12 @@ export default class App extends Component {
 					</Route>
 					<Route path="/MasterRegister">
 						<MasterRegister />
+					</Route>
+					<Route path="/UserLogin">
+						<UserLogin />
+					</Route>
+					<Route path="/UserRegister">
+						<UserRegister />
 					</Route>
 				</Switch>
 			</Router>
